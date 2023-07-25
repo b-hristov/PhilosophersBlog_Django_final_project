@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    {% if user.is_authenticated %}
+        <p>Welcome, {{ user.username }}!</p>
+
+        <article>
+            <h2>Post Title</h2>
+            <p class="post-info">Author: John Doe | Date: September 1, 2021</p>
+            <img src="image1.jpg" alt="Post Image">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam consectetur, purus nec tincidunt luctus,
+                neque dolor commodo purus.</p>
+            <a href="/post/1/">Read More</a>
+
+            <section class="comments">
+                <h3>Comments</h3>
+                <ul>
+                    <li>Comment 1</li>
+                    <li>Comment 2</li>
+                    <!-- Add more comments here -->
+                </ul>
+            </section>
+
+            <section class="likes">
+                <h3>Likes</h3>
+                <p>100 likes</p>
+            </section>
+        </article>
+
+        <article>
+            <h2>Another Post Title</h2>
+            <p class="post-info">Author: Jane Smith | Date: September 5, 2021</p>
+            <img src="image2.jpg" alt="Post Image">
+            <p>Vivamus vitae nisl ut ipsum venenatis faucibus. Sed ullamcorper, metus ac tincidunt hendrerit.</p>
+            <a href="/post/2/">Read More</a>
+
+            <section class="comments">
+                <h3>Comments</h3>
+                <ul>
+                    <li>Comment 1</li>
+                    <li>Comment 2</li>
+                    <!-- Add more comments here -->
+                </ul>
+            </section>
+
+            <section class="likes">
+                <h3>Likes</h3>
+                <p>75 likes</p>
+            </section>
+        </article>
+    {% else %}
+        <p>Hello, Anonymous!</p>
+        <p>Please login to view the articles.</p>
+    {% endif %}
+
+{% endblock %}

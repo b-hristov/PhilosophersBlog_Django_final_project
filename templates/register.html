@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <link rel="stylesheet" href="{% static 'register-form.css' %}">
+
+    <div class="signup-form">
+        <form action="{% url 'register' %}" method="post">
+            {% csrf_token %}
+            <h2>Register</h2>
+            <p class="hint-text">Create your account. It's free and only takes a minute.</p>
+            <div class="form-group">
+                <input type="text" class="form-control" name="{{ form.username.name }}"
+                       placeholder="Username" required>
+                {% if form.username.errors %}
+                    <span class="error-msg">{{ form.username.errors.as_text }}</span>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <input type="email" class="form-control" name="{{ form.email.name }}"
+                       placeholder="Email" required>
+                {% if form.email.errors %}
+                    <span class="error-msg">{{ form.email.errors.as_text }}</span>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" name="{{ form.password1.name }}"
+                       placeholder="Password" required>
+                {% if form.password1.errors %}
+                    <span class="error-msg">{{ form.password1.errors.as_text }}</span>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" name="{{ form.password2.name }}"
+                       placeholder="Confirm Password" required>
+                {% if form.password2.errors %}
+                    <span class="error-msg">{{ form.password2.errors.as_text }}</span>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-success btn-lg btn-block">Register Now</button>
+            </div>
+        </form>
+        <div class="text-center">Already have an account? <a href="#">Sign in</a></div>
+    </div>
+{% endblock %}
+
+
+{#    <div class="container">#}
+{#        <div class="row justify-content-center mt-5">#}
+{#            <div class="col-md-6">#}
+{#                <div class="card">#}
+{#                    <div class="card-body">#}
+{#                        <div class="container">#}
+{#                            <form method="post" action="{% url 'register' %}">#}
+{#                                {% csrf_token %}#}
+{#                                <div class="mb-3">#}
+{#                                    <label for="{{ form.username.id_for_label }}" class="form-label">Username</label>#}
+{#                                    {{ form.username }}#}
+{#                                    {% for error in form.username.errors %}#}
+{#                                        <span class="error-msg">{{ error }}</span>#}
+{#                                    {% endfor %}#}
+{#                                </div>#}
+{#                                <div class="mb-3">#}
+{#                                    <label for="{{ form.email.id_for_label }}" class="form-label">Email</label>#}
+{#                                    {{ form.email }}#}
+{#                                    {% for error in form.email.errors %}#}
+{#                                        <span class="error-msg">{{ error }}</span>#}
+{#                                    {% endfor %}#}
+{#                                </div>#}
+{#                                <div class="mb-3">#}
+{#                                    <label for="{{ form.password1.id_for_label }}" class="form-label">Password</label>#}
+{#                                    {{ form.password1 }}#}
+{#                                    {% for error in form.password1.errors %}#}
+{#                                        <span class="error-msg">{{ error }}</span>#}
+{#                                    {% endfor %}#}
+{##}
+{#                                </div>#}
+{#                                <div class="mb-3">#}
+{#                                    <label for="{{ form.password2.id_for_label }}" class="form-label">Confirm#}
+{#                                        Password</label>#}
+{#                                    {{ form.password2 }}#}
+{#                                    {% for error in form.password2.errors %}#}
+{#                                        <span class="error-msg">{{ error }}</span>#}
+{#                                    {% endfor %}#}
+{#                                </div>#}
+{#                                <div class="d-grid gap-2">#}
+{#                                    <button type="submit" class="btn btn-primary">Register</button>#}
+{#                                </div>#}
+{#                            </form>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
