@@ -54,7 +54,9 @@
 
             <div class="form-group">
                 <input type="date" class="form-control" name="{{ form.date_of_birth.name }}"
-                       placeholder="Date of birth"  pattern="^\d{4}/\d{2}/\d{4}$" required>
+                       placeholder="Date of birth"
+                       pattern="^(?:0[1-9]|1[0-2])/(?:0[1-9]|[12]\d|3[01])/(?:(?:19|20)\d\d)$"
+                       required>
                 {% if form.date_of_birth.errors %}
                     <span class="error-msg">{{ form.date_of_birth.errors.as_text }}</span>
                 {% endif %}

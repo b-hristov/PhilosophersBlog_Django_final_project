@@ -1,5 +1,4 @@
 body {
-	color: #fff;
 	background: #63738a;
 	font-family: 'Roboto', sans-serif;
 }
@@ -85,4 +84,9 @@ body {
 }
 .signup-form form a:hover {
 	text-decoration: underline;
+}
+
+.btn-block {
+    display: block;
+    width: 100%;
 }
