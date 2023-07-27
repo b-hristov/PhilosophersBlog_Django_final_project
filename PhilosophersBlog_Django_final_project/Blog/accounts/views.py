@@ -1,4 +1,4 @@
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth import login, get_user_model
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
@@ -29,4 +29,8 @@ class LoginView(LoginView):
         if self.success_url:
             return self.success_url
         return super().success_url
+
+
+class LogOutView(LogoutView):
+    next_page = reverse_lazy('index')
 
