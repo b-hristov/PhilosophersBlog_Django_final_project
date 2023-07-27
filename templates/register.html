@@ -6,20 +6,21 @@
     <div class="signup-form">
         <form action="{% url 'register' %}" method="post">
             {% csrf_token %}
+            {{ form.media }}
             <h2>Register</h2>
             <p class="hint-text">Create your account. It's free and only takes a minute.</p>
-            <div class="form-group">
-                <input type="text" class="form-control" name="{{ form.username.name }}"
-                       placeholder="Username" required>
-                {% if form.username.errors %}
-                    <span class="error-msg">{{ form.username.errors.as_text }}</span>
-                {% endif %}
-            </div>
             <div class="form-group">
                 <input type="email" class="form-control" name="{{ form.email.name }}"
                        placeholder="Email" required>
                 {% if form.email.errors %}
                     <span class="error-msg">{{ form.email.errors.as_text }}</span>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" name="{{ form.username.name }}"
+                       placeholder="Username" required>
+                {% if form.username.errors %}
+                    <span class="error-msg">{{ form.username.errors.as_text }}</span>
                 {% endif %}
             </div>
             <div class="form-group">
@@ -37,59 +38,44 @@
                 {% endif %}
             </div>
             <div class="form-group">
+                <input type="text" class="form-control" name="{{ form.first_name.name }}"
+                       placeholder="First name" required>
+                {% if form.first_name.errors %}
+                    <span class="error-msg">{{ form.first_name.errors.as_text }}</span>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" name="{{ form.last_name.name }}"
+                       placeholder="Last name" required>
+                {% if form.last_name.errors %}
+                    <span class="error-msg">{{ form.last_name.errors.as_text }}</span>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                <input type="date" class="form-control" name="{{ form.date_of_birth.name }}"
+                       placeholder="Date of birth"  pattern="^\d{4}/\d{2}/\d{4}$" required>
+                {% if form.date_of_birth.errors %}
+                    <span class="error-msg">{{ form.date_of_birth.errors.as_text }}</span>
+                {% endif %}
+            </div>
+{#            <div class="form-group">#}
+{#                <label for="file">Upload your avatar:</label>#}
+{#                <input type="file" class="form-control" name="{{ form.picture.name }}"#}
+{#                       accept="image/*" placeholder="Avatar">#}
+{#                {% if form.picture.errors %}#}
+{#                    <span class="error-msg">{{ form.picture.errors.as_text }}</span>#}
+{#                {% endif %}#}
+{#            </div>#}
+            <div class="form-group">
                 <button type="submit" class="btn btn-success btn-lg btn-block">Register Now</button>
             </div>
+            <div class="form-group">
+                Already have an account? <a href="{% url 'login' %}">Sign in</a>
+            </div>
         </form>
-        <div class="text-center">Already have an account? <a href="#">Sign in</a></div>
     </div>
 {% endblock %}
 
 
-{#    <div class="container">#}
-{#        <div class="row justify-content-center mt-5">#}
-{#            <div class="col-md-6">#}
-{#                <div class="card">#}
-{#                    <div class="card-body">#}
-{#                        <div class="container">#}
-{#                            <form method="post" action="{% url 'register' %}">#}
-{#                                {% csrf_token %}#}
-{#                                <div class="mb-3">#}
-{#                                    <label for="{{ form.username.id_for_label }}" class="form-label">Username</label>#}
-{#                                    {{ form.username }}#}
-{#                                    {% for error in form.username.errors %}#}
-{#                                        <span class="error-msg">{{ error }}</span>#}
-{#                                    {% endfor %}#}
-{#                                </div>#}
-{#                                <div class="mb-3">#}
-{#                                    <label for="{{ form.email.id_for_label }}" class="form-label">Email</label>#}
-{#                                    {{ form.email }}#}
-{#                                    {% for error in form.email.errors %}#}
-{#                                        <span class="error-msg">{{ error }}</span>#}
-{#                                    {% endfor %}#}
-{#                                </div>#}
-{#                                <div class="mb-3">#}
-{#                                    <label for="{{ form.password1.id_for_label }}" class="form-label">Password</label>#}
-{#                                    {{ form.password1 }}#}
-{#                                    {% for error in form.password1.errors %}#}
-{#                                        <span class="error-msg">{{ error }}</span>#}
-{#                                    {% endfor %}#}
-{##}
-{#                                </div>#}
-{#                                <div class="mb-3">#}
-{#                                    <label for="{{ form.password2.id_for_label }}" class="form-label">Confirm#}
-{#                                        Password</label>#}
-{#                                    {{ form.password2 }}#}
-{#                                    {% for error in form.password2.errors %}#}
-{#                                        <span class="error-msg">{{ error }}</span>#}
-{#                                    {% endfor %}#}
-{#                                </div>#}
-{#                                <div class="d-grid gap-2">#}
-{#                                    <button type="submit" class="btn btn-primary">Register</button>#}
-{#                                </div>#}
-{#                            </form>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
-{#        </div>#}
-{#    </div>#}
+

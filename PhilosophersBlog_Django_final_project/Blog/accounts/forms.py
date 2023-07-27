@@ -1,10 +1,64 @@
 from django import forms
-from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import get_user_model
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+
+from PhilosophersBlog_Django_final_project.Blog.accounts.models import Profile
+from PhilosophersBlog_Django_final_project.Blog.main.validators import validate_letters, clean_avatar
+
+
+UserModel = get_user_model()
 
 
 class RegisterUserForm(UserCreationForm):
     class Meta:
-        model = User
-        fields = ['username', 'email', 'password1', 'password2']
+        model = UserModel
+        fields = ['email', 'username', 'password1', 'password2',
+                  'first_name', 'last_name',
+                  'date_of_birth']
 
+    first_name = forms.CharField(
+        max_length=25,
+        validators=(
+            validate_letters,
+        )
+    )
+
+    last_name = forms.CharField(
+        max_length=25,
+        validators=(
+            validate_letters,
+        )
+    )
+
+    email = forms.EmailField()
+
+    # image = forms.ImageField(
+    #     # required=False,
+    #     validators=(
+    #         clean_avatar,
+    #     )
+    # )
+
+    date_of_birth = forms.DateField()
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        profile = Profile(
+            first_name=self.cleaned_data['first_name'],
+            last_name=self.cleaned_data['last_name'],
+            email=self.cleaned_data['email'],
+            # image=self.cleaned_data['picture'],
+            date_of_birth=self.cleaned_data['date_of_birth'],
+            user=user,
+        )
+
+        if commit:
+            user.save()
+            profile.save()
+        return user
+
+
+class LoginForm(AuthenticationForm):
+    class Meta:
+        model = UserModel
+        field = ['username', 'password']

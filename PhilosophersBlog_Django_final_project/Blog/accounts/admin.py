@@ -1,3 +1,7 @@
 from django.contrib import admin
+from PhilosophersBlog_Django_final_project.Blog.accounts.models import Profile
 
-# Register your models here.
+
+@admin.register(Profile)
+class BlogAdmin(admin.ModelAdmin):
+    list_display = ('user',)
