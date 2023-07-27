@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.core.exceptions import ValidationError
 
 from PhilosophersBlog_Django_final_project.Blog.accounts.models import Profile
 from PhilosophersBlog_Django_final_project.Blog.main.validators import validate_letters, clean_avatar
@@ -40,6 +41,13 @@ class RegisterUserForm(UserCreationForm):
     # )
 
     date_of_birth = forms.DateField()
+
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        if Profile.objects.filter(email=email).exists():
+            raise ValidationError('This email address is already registered.')
+
+        return email
 
     def save(self, commit=True):
         user = super().save(commit=False)

@@ -15,11 +15,6 @@ class CreateUserView(CreateView):
 
     def form_valid(self, form):
         result = super().form_valid(form)
-        # email = form.cleaned_data['email']
-        # if Profile.objects.filter(email=email).exists():
-        #     form.add_error('email', 'This email address is already registered.')
-        #     return self.form_invalid(form)
-
         login(self.request, self.object)
 
         return result
