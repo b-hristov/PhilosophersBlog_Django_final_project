@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="profile-container">
+        <section class="profile-info">
+            <div class="profile-image">
+
+                <img src="{% static 'images/sample-avatar.jpg' %}" alt="Profile Image">
+            </div>
+            <div class="personal-info">
+                <h2>Profile info</h2>
+                <p><strong>First Name:</strong> John</p>
+                <p><strong>Last Name:</strong> Doe</p>
+                <p><strong>Date of Birth:</strong> January 1, 1990</p>
+                <p><strong>Username:</strong> johndoe</p>
+                <p><strong>Email:</strong> john.doe@example.com</p>
+                <div class="profile-buttons">
+                    <button class="edit-button">Edit Profile</button>
+                    <button class="delete-button">Delete Profile</button>
+                </div>
+            </div>
+        </section>
+        <section class="posts">
+            <h2>Posts</h2>
+            <!-- Add posts here -->
+            <div class="post">
+                <h3>Post Title 1</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </div>
+{#            <div class="post">#}
+{#                <h3>Post Title 2</h3>#}
+{#                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>#}
+{#            </div>#}
+            <!-- Add more posts here -->
+        </section>
+
+    </div>
+
+    <style>
+
+    </style>
+{% endblock %}

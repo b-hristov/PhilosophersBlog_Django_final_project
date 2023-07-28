@@ -3,55 +3,225 @@
 {% block content %}
 
     {% if user.is_authenticated %}
-        <p>Welcome, {{ user.username }}!</p>
 
-        <article>
-            <h2>Post Title</h2>
-            <p class="post-info">Author: John Doe | Date: September 1, 2021</p>
-            <img src="image1.jpg" alt="Post Image">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam consectetur, purus nec tincidunt luctus,
-                neque dolor commodo purus.</p>
-            <a href="/post/1/">Read More</a>
+        <div class="greeting-banner" data-username="{{ user.username }}">
+            <p>Welcome {{ user.username }}! Enjoy our webspace and create your own content!</p>
+        </div>
+        <div class="post-content">
+            <div class="post-container">
+                <article class="post entry" itemscope="" itemprop="blogPost" itemtype="http://schema.org/BlogPosting">
 
-            <section class="comments">
-                <h3>Comments</h3>
+                    <header class="entry-header">
+                        <h2 class="entry-title" itemprop="headline">Blog Post Title</h2>
+                        <div class="entry-meta">
+                        <span class="post-date">
+                            <i class="fa-solid fa-clock"></i> <span class="updated">12th February 2015</span>
+                        </span>
+                            <span class="post-categories">
+                            <i class="fa fa-folder fa-fw"></i> <a href="blog.html" rel="tag">Category A</a>
+                        </span>
+
+                            <span class="post-comments">
+                                <i class="fa fa-comments fa-fw"></i> 10
+                             </span>
+                            <span class="post-likes">
+                                <i class="fa fa-thumbs-up fa-fw"></i> 25
+                            </span>
+                            <!-- Add "Read more" button -->
+                            <a href="blog-post.html" class="read-more">Read full post <i class="fa fa-arrow-right"></i></a>
+
+                        </div>
+                    </header>
+
+                    <div class="entry-image">
+                        <img src="http://dummyimage.com/800x250/f3f3f3/d1d1d1.jpg&amp;text=Featured+Image"
+                             alt="Blog Post"
+                             itemprop="image">
+                    </div>
+
+                    <div class="entry-content" itemprop="articleBody">
+                        <p>Lorem ipsum dolor sit amet, orci a faucibus, ante curabitur augue ornare nulla facilisi
+                            bibendum,
+                            tortor felis quam rutrum velit, pretium posuere placerat. Vitae ut nulla eget. Lacus sociis,
+                            eget dolor metus nam nunc leo. Tempor eget donec officia. Luctus nullam purus urna iaculis,
+                            integer dui risus, ultricies lacinia aliquet.</p>
+                        <p>Lorem ipsum dolor sit amet, orci a faucibus, ante curabitur augue ornare nulla facilisi
+                            bibendum,
+                            tortor felis quam rutrum velit, pretium posuere placerat. Vitae ut nulla eget. Lacus sociis,
+                            eget dolor metus nam nunc leo. Tempor eget donec officia. Luctus nullam purus urna iaculis,
+                            integer dui risus, ultricies lacinia aliquet.</p>
+                        <p>Lorem ipsum dolor sit amet, orci a faucibus, ante curabitur augue ornare nulla facilisi
+                            bibendum,
+                            tortor felis quam rutrum velit, pretium posuere placerat. Vitae ut nulla eget. Lacus sociis,
+                            eget dolor metus nam nunc leo. Tempor eget donec officia. Luctus nullam purus urna iaculis,
+                            integer dui risus, ultricies lacinia aliquet.</p>
+                    </div>
+                </article>
+                <article class="post entry" itemscope="" itemprop="blogPost" itemtype="http://schema.org/BlogPosting">
+
+                    <header class="entry-header">
+                        <h2 class="entry-title" itemprop="headline">Blog Post Title</h2>
+                        <div class="entry-meta">
+                        <span class="post-date">
+                            <i class="fa-solid fa-clock"></i> <span class="updated">12th February 2015</span>
+                        </span>
+                            <span class="post-categories">
+                            <i class="fa fa-folder fa-fw"></i> <a href="blog.html" rel="tag">Category A</a>
+                        </span>
+
+                            <span class="post-comments">
+                                <i class="fa fa-comments fa-fw"></i> 10
+                             </span>
+                            <span class="post-likes">
+                                <i class="fa fa-thumbs-up fa-fw"></i> 25
+                            </span>
+                            <!-- Add "Read more" button -->
+                            <a href="blog-post.html" class="read-more">Read full post <i class="fa fa-arrow-right"></i></a>
+
+                        </div>
+                    </header>
+
+                    <div class="entry-image">
+                        <img src="http://dummyimage.com/800x250/f3f3f3/d1d1d1.jpg&amp;text=Featured+Image"
+                             alt="Blog Post"
+                             itemprop="image">
+                    </div>
+
+                    <div class="entry-content" itemprop="articleBody">
+                        <p>Lorem ipsum dolor sit amet, orci a faucibus, ante curabitur augue ornare nulla facilisi
+                            bibendum,
+                            tortor felis quam rutrum velit, pretium posuere placerat. Vitae ut nulla eget. Lacus sociis,
+                            eget dolor metus nam nunc leo. Tempor eget donec officia. Luctus nullam purus urna iaculis,
+                            integer dui risus, ultricies lacinia aliquet.</p>
+                        <p>Lorem ipsum dolor sit amet, orci a faucibus, ante curabitur augue ornare nulla facilisi
+                            bibendum,
+                            tortor felis quam rutrum velit, pretium posuere placerat. Vitae ut nulla eget. Lacus sociis,
+                            eget dolor metus nam nunc leo. Tempor eget donec officia. Luctus nullam purus urna iaculis,
+                            integer dui risus, ultricies lacinia aliquet.</p>
+                        <p>Lorem ipsum dolor sit amet, orci a faucibus, ante curabitur augue ornare nulla facilisi
+                            bibendum,
+                            tortor felis quam rutrum velit, pretium posuere placerat. Vitae ut nulla eget. Lacus sociis,
+                            eget dolor metus nam nunc leo. Tempor eget donec officia. Luctus nullam purus urna iaculis,
+                            integer dui risus, ultricies lacinia aliquet.</p>
+                    </div>
+                </article>
+                <article class="post entry" itemscope="" itemprop="blogPost" itemtype="http://schema.org/BlogPosting">
+
+                    <header class="entry-header">
+                        <h2 class="entry-title" itemprop="headline">Blog Post Title</h2>
+                        <div class="entry-meta">
+                        <span class="post-date">
+                            <i class="fa-solid fa-clock"></i> <span class="updated">12th February 2015</span>
+                        </span>
+                            <span class="post-categories">
+                            <i class="fa fa-folder fa-fw"></i> <a href="blog.html" rel="tag">Category A</a>
+                        </span>
+
+                            <span class="post-comments">
+                                <i class="fa fa-comments fa-fw"></i> 10
+                             </span>
+                            <span class="post-likes">
+                                <i class="fa fa-thumbs-up fa-fw"></i> 25
+                            </span>
+                            <!-- Add "Read more" button -->
+                            <a href="blog-post.html" class="read-more">Read full post <i class="fa fa-arrow-right"></i></a>
+
+                        </div>
+                    </header>
+
+                    <div class="entry-image">
+                        <img src="http://dummyimage.com/800x250/f3f3f3/d1d1d1.jpg&amp;text=Featured+Image"
+                             alt="Blog Post"
+                             itemprop="image">
+                    </div>
+
+                    <div class="entry-content" itemprop="articleBody">
+                        <p>Lorem ipsum dolor sit amet, orci a faucibus, ante curabitur augue ornare nulla facilisi
+                            bibendum,
+                            tortor felis quam rutrum velit, pretium posuere placerat. Vitae ut nulla eget. Lacus sociis,
+                            eget dolor metus nam nunc leo. Tempor eget donec officia. Luctus nullam purus urna iaculis,
+                            integer dui risus, ultricies lacinia aliquet.</p>
+                        <p>Lorem ipsum dolor sit amet, orci a faucibus, ante curabitur augue ornare nulla facilisi
+                            bibendum,
+                            tortor felis quam rutrum velit, pretium posuere placerat. Vitae ut nulla eget. Lacus sociis,
+                            eget dolor metus nam nunc leo. Tempor eget donec officia. Luctus nullam purus urna iaculis,
+                            integer dui risus, ultricies lacinia aliquet.</p>
+                        <p>Lorem ipsum dolor sit amet, orci a faucibus, ante curabitur augue ornare nulla facilisi
+                            bibendum,
+                            tortor felis quam rutrum velit, pretium posuere placerat. Vitae ut nulla eget. Lacus sociis,
+                            eget dolor metus nam nunc leo. Tempor eget donec officia. Luctus nullam purus urna iaculis,
+                            integer dui risus, ultricies lacinia aliquet.</p>
+                    </div>
+                </article>
+            </div>
+            <div class="widget">
+                <h3 class="widget-title">Categories</h3>
                 <ul>
-                    <li>Comment 1</li>
-                    <li>Comment 2</li>
-                    <!-- Add more comments here -->
+                    <li><a href="#">All</a></li>
+                    <li><a href="#">Ethics</a></li>
+                    <li><a href="#">Epistemology</a></li>
+                    <li><a href="#">Metaphysics</a></li>
+                    <li><a href="#">Political Philosophy</a></li>
+                    <li><a href="#">Aesthetics</a></li>
+                    <li><a href="#">Philosophy of Science</a></li>
+                    <li><a href="#">Philosophy of Religion</a></li>
+                    <li><a href="#">Existentialism</a></li>
+                    <li><a href="#">Eastern Philosophy</a></li>
+                    <li><a href="#">Feminist Philosophy</a></li>
+                    <li><a href="#">Memes</a></li>
                 </ul>
-            </section>
+            </div>
+        </div>
 
-            <section class="likes">
-                <h3>Likes</h3>
-                <p>100 likes</p>
-            </section>
-        </article>
-
-        <article>
-            <h2>Another Post Title</h2>
-            <p class="post-info">Author: Jane Smith | Date: September 5, 2021</p>
-            <img src="image2.jpg" alt="Post Image">
-            <p>Vivamus vitae nisl ut ipsum venenatis faucibus. Sed ullamcorper, metus ac tincidunt hendrerit.</p>
-            <a href="/post/2/">Read More</a>
-
-            <section class="comments">
-                <h3>Comments</h3>
-                <ul>
-                    <li>Comment 1</li>
-                    <li>Comment 2</li>
-                    <!-- Add more comments here -->
-                </ul>
-            </section>
-
-            <section class="likes">
-                <h3>Likes</h3>
-                <p>75 likes</p>
-            </section>
-        </article>
+        {#        <article>#}
+        {#            <h2>Post Title</h2>#}
+        {#            <p class="post-info">Author: John Doe | Date: September 1, 2021</p>#}
+        {#            <img src="image1.jpg" alt="Post Image">#}
+        {#            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam consectetur, purus nec tincidunt luctus,#}
+        {#                neque dolor commodo purus.</p>#}
+        {#            <a href="/post/1/">Read More</a>#}
+        {##}
+        {#            <section class="comments">#}
+        {#                <h3>Comments</h3>#}
+        {#                <ul>#}
+        {#                    <li>Comment 1</li>#}
+        {#                    <li>Comment 2</li>#}
+        {#                    <!-- Add more comments here -->#}
+        {#                </ul>#}
+        {#            </section>#}
+        {##}
+        {#            <section class="likes">#}
+        {#                <h3>Likes</h3>#}
+        {#                <p>100 likes</p>#}
+        {#            </section>#}
+        {#        </article>#}
+        {##}
+        {#        <article>#}
+        {#            <h2>Another Post Title</h2>#}
+        {#            <p class="post-info">Author: Jane Smith | Date: September 5, 2021</p>#}
+        {#            <img src="image2.jpg" alt="Post Image">#}
+        {#            <p>Vivamus vitae nisl ut ipsum venenatis faucibus. Sed ullamcorper, metus ac tincidunt hendrerit.</p>#}
+        {#            <a href="/post/2/">Read More</a>#}
+        {##}
+        {#            <section class="comments">#}
+        {#                <h3>Comments</h3>#}
+        {#                <ul>#}
+        {#                    <li>Comment 1</li>#}
+        {#                    <li>Comment 2</li>#}
+        {#                    <!-- Add more comments here -->#}
+        {#                </ul>#}
+        {#            </section>#}
+        {##}
+        {#            <section class="likes">#}
+        {#                <h3>Likes</h3>#}
+        {#                <p>75 likes</p>#}
+        {#            </section>#}
+        {#        </article>#}
     {% else %}
-        <p>Hello, Anonymous!</p>
+        <p>Hello, dear friend!</p>
         <p>Please login to view the articles.</p>
     {% endif %}
+
+    <script src="{% static 'js/greeting-banner.js' %}"></script>
 
 {% endblock %}
