@@ -2,13 +2,7 @@
 const banner = document.querySelector('.greeting-banner');
 
 function showGreetingBanner(username) {
-  banner.querySelector('p').textContent = `Welcome, ${username}! Enjoy our webspace and create your own content!`;
-  banner.style.display = 'block';
-  setTimeout(hideGreetingBanner, 5000);
-}
-
-function showGreetingBannerNoUser() {
-  banner.querySelector('p').textContent = `Welcome, dear friend! Please login to your account to see the posts!`;
+  banner.querySelector('p').textContent = `Welcome ${username}! Enjoy our webspace and create your own content!`;
   banner.style.display = 'block';
   setTimeout(hideGreetingBanner, 5000);
 }
@@ -23,9 +17,4 @@ const username = banner.dataset.username;
 const isAuthenticated = true;
 if (isAuthenticated) {
   showGreetingBanner(username);
-  console.log(true)
-} else {
-  showGreetingBannerNoUser()
-  console.log(false)
 }
-
