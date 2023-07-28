@@ -16,31 +16,39 @@
         <div class="menu-icon">
             <span class="fas fa-bars"></span>
         </div>
-        <img src="{% static 'images/Socrates.jpg' %}" alt="logo-img" width="100px">
         <div class="logo">
-            Philosopher Inside You
+            <img src="{% static 'images/Socrates.jpg' %}" alt="logo-img" width="100px">
+            <div class>
+                Philosopher Inside You
+            </div>
         </div>
-        <div class="nav-items">
-            <li><a href="/">Home</a></li>
-            {% if user.is_authenticated %}
-                <li><a href="/profile/">My Profile</a></li>
-                <li><a href="/posts/">My posts</a></li>
-                <li><a href="/logout/">Logout</a></li>
-            {% else %}
-                <li><a href="/login/">Login</a></li>
-                <li><a href="/register/">Register</a></li>
-            {% endif %}
+        <div class="right-side-items">
+            <div class="nav-items">
+                <div class="cancel-icon">
+                    <span class="fas fa-times"></span>
+                </div>
+                <li><a href="/">Home</a></li>
+                {% if user.is_authenticated %}
+                    <li><a href="/creat_post/">Create post</a></li>
+                    <li><a href="/posts/">My posts</a></li>
+                    <li><a href="/profile/">My Profile</a></li>
+                    <li><a href="/logout/">Logout</a></li>
+                {% else %}
+                    <li><a href="/login/">Login</a></li>
+                    <li><a href="/register/">Register</a></li>
+                {% endif %}
+            </div>
+            <form action="#">
+                <input type="search" class="search-data" placeholder="Search" required>
+                <button type="submit" class="fas fa-search"></button>
+            </form>
         </div>
+
         <div class="search-icon">
             <span class="fas fa-search"></span>
         </div>
-        <div class="cancel-icon">
-            <span class="fas fa-times"></span>
-        </div>
-        <form action="#">
-            <input type="search" class="search-data" placeholder="Search" required>
-            <button type="submit" class="fas fa-search"></button>
-        </form>
+
+
     </nav>
 </header>
 

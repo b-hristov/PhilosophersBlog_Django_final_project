@@ -10,7 +10,8 @@
 }
 
 body {
-    background: #f2f2f2;
+    background: #63738a;
+    color: white;
     position: relative;
     min-height: 100vh;
     margin: 0;
@@ -33,6 +34,11 @@ nav .logo {
     font-size: 30px;
     font-weight: 600;
     letter-spacing: -1px;
+    display: flex;
+    gap: 20px;
+    text-align: center;
+    align-items: center;
+    /*margin-right: 300px;*/
 }
 
 nav .nav-items {
@@ -44,6 +50,7 @@ nav .nav-items {
 nav .nav-items li {
     list-style: none;
     padding: 0 15px;
+    margin-top: 7px;
 }
 
 nav .nav-items li a {
@@ -98,7 +105,7 @@ nav .search-icon {
     width: 40px;
     text-align: center;
     margin: 0 50px;
-    font-size: 18px;
+    font-size: 25px;
     color: #fff;
     cursor: pointer;
     display: none;
@@ -116,8 +123,8 @@ nav .search-icon {
     }
 }
 
-@media (max-width: 1140px) {
-    nav > img {
+@media (max-width: 1840px) {
+    nav img {
         display: none;
     }
 
@@ -127,6 +134,7 @@ nav .search-icon {
 
     nav .logo {
         flex: 2;
+        font-size: 25px;
         text-align: center;
     }
 
@@ -262,7 +270,7 @@ nav .logo.space {
     nav .cancel-icon,
     nav .search-icon {
         margin: 0 10px;
-        font-size: 16px;
+        font-size: 25px;
     }
 }
 
@@ -287,8 +295,8 @@ nav .logo.space {
     margin: 10px 0;
 }
 
-nav > img {
-    border: 1px solid;
+nav img {
+    border: 1px solid black;
     border-radius: 20px;
 }
 
@@ -350,4 +358,73 @@ footer p {
 
 form .error-msg {
     color: red;
+}
+
+.right-side-items {
+    display: flex;
+    flex-direction: row-reverse;
+    margin-left: 300px;
+}
+
+/* Profile page styles */
+
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.profile-info {
+    display: flex;
+    align-items: center;
+}
+
+.profile-image img {
+    width: 150px;
+    border-radius: 50%;
+    margin-right: 2rem;
+}
+
+.personal-info {
+    font-size: 18px;
+}
+
+.posts {
+    margin-top: 2rem;
+}
+
+.post {
+    border: 1px solid #ccc;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.profile-buttons {
+    display: flex;
+    margin-top: 1rem;
+}
+
+.edit-button,
+.delete-button {
+    padding: 0.5rem 1rem;
+    margin-right: 1rem;
+    background-color: #007bff;
+    color: #fff;
+    border: 1px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.delete-button {
+    background-color: #dc3545;
+}
+
+.edit-button:hover {
+    background-color: #0056b3;
+}
+
+.delete-button:hover {
+    background-color: #910303;
 }

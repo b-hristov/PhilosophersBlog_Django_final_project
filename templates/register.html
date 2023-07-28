@@ -52,13 +52,12 @@
                     <span class="error-msg">{{ form.last_name.errors.as_text }}</span>
                 {% endif %}
             </div>
-            <label>Date of birth: </label>
             <div id="datepicker" class="form-group input-group date">
                 <input type="text"
                        class="form-control"
                        name="{{ form.date_of_birth.name }}"
                        data-date-format="mm/dd/yyyy"
-                       placeholder="MM/DD/YYYY"
+                       placeholder="Date of birth: MM/DD/YYYY"
                        required>
                 <span class="input-group-addon">
                     <i class="fa-solid fa-calendar-days fa-sm"></i>
