@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700&display=swap');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
+@import url('https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css');
 
 * {
     margin: 0;
@@ -11,12 +12,13 @@
 
 body {
     background: #f5f5f5;
-    /*color: white;*/
     position: relative;
     min-height: 100vh;
     margin: 0;
     padding-bottom: 80px;
 }
+
+/* Navbar styles */
 
 nav {
     background: #171c24;
@@ -24,8 +26,7 @@ nav {
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    /* flex-direction: row-reverse; */
-    height: 115px;
+    height: 110px;
     padding: 0 100px;
 }
 
@@ -34,28 +35,23 @@ nav .logo {
     font-size: 30px;
     font-weight: 600;
     letter-spacing: -1px;
-    display: flex;
-    gap: 20px;
-    text-align: center;
-    align-items: center;
-    /*margin-right: 300px;*/
+    padding-left: 20px;
 }
 
 nav .nav-items {
     display: flex;
-    /* flex: 1; */
+    flex: 1;
     padding: 0 0 0 40px;
 }
 
 nav .nav-items li {
     list-style: none;
     padding: 0 15px;
-    margin-top: 7px;
 }
 
 nav .nav-items li a {
     color: #fff;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 500;
     text-decoration: none;
 }
@@ -69,7 +65,7 @@ nav form {
     height: 40px;
     padding: 2px;
     background: #1e232b;
-    min-width: 18% !important;
+    /* min-width: 18% !important; */
     border-radius: 2px;
     border: 1px solid rgba(155, 155, 155, 0.2);
 }
@@ -105,7 +101,7 @@ nav .search-icon {
     width: 40px;
     text-align: center;
     margin: 0 50px;
-    font-size: 25px;
+    font-size: 18px;
     color: #fff;
     cursor: pointer;
     display: none;
@@ -117,58 +113,13 @@ nav .search-icon {
     display: none;
 }
 
-.content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    text-align: center;
-    transform: translate(-50%, -50%);
-}
-
-.content header {
-    font-size: 30px;
-    font-weight: 700;
-}
-
-.content .text {
-    font-size: 30px;
-    font-weight: 700;
-}
-
-.space {
-    margin: 10px 0;
-}
-
-nav .logo.space {
-    color: red;
-    padding: 0 5px 0 0;
-}
-
-.content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.content header {
-    font-size: 30px;
-    font-weight: 700;
-}
-
-.content .text {
-    font-size: 30px;
-    font-weight: 700;
-}
-
-.content .space {
-    margin: 10px 0;
-}
-
 nav img {
     border: 1px solid black;
     border-radius: 20px;
 }
+
+
+/* Footer styles */
 
 .footer {
     color: #fff;
@@ -226,15 +177,6 @@ footer p {
     padding-top: 15px;
 }
 
-form .error-msg {
-    color: red;
-}
-
-.right-side-items {
-    display: flex;
-    flex-direction: row-reverse;
-    margin-left: 300px;
-}
 
 /* Profile page styles */
 
@@ -301,7 +243,7 @@ form .error-msg {
 }
 
 
-/*!* Styling for the blog post *!*/
+/* Styling for the blog posts */
 
 .entry-title {
     font-size: 24px;
@@ -329,7 +271,6 @@ form .error-msg {
     margin-bottom: 15px;
 }
 
-/* Center the blog content */
 .post-content {
     display: flex;
     justify-content: center;
@@ -342,7 +283,7 @@ form .error-msg {
     flex-wrap: wrap;
     justify-content: space-between;
     max-width: 1270px;
-    margin: 50px 50px;
+    margin-top: 100px;
 }
 
 .post {
@@ -351,6 +292,7 @@ form .error-msg {
     margin-right: 30px;
     max-width: 600px;
     border: 1px solid #ccc;
+    border-radius: 10px;
     background-color: #fff;
     padding: 20px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -360,17 +302,19 @@ form .error-msg {
     margin-left: 10px;
 }
 
-/* Styles for the widget */
+
+/* Styles for the categories widget */
 .widget {
-    flex-basis: calc(50% - 20px);
+    /*flex-basis: calc(50% - 20px);*/
     max-height: 400px;
     max-width: 260px;
     overflow-y: auto;
     padding: 20px;
     border: 1px solid #ccc;
+    border-radius: 10px;
     background-color: #fff;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    margin-top: 50px;
+    margin-top: 100px;
 }
 
 .widget-title {
@@ -395,6 +339,11 @@ form .error-msg {
 
 .widget a:hover {
     color: #007bff;
+}
+
+.pagination {
+    padding-bottom: 50px;
+    padding-left: 30px;
 }
 
 /* Styles for the greeting banner */
@@ -454,24 +403,166 @@ form .error-msg {
     margin-left: 5px;
 }
 
+
+/* Post details styles */
+
+.post-details {
+    border: 1px solid #ccc;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.comment-section {
+    max-width: 600px;
+    padding: 30px;
+}
+
+.comment {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.comment-details {
+    flex: 1;
+}
+
+.comment-author {
+    font-weight: bold;
+}
+
+.comment-text {
+    margin-top: 5px;
+}
+
+.comment-date {
+    font-size: 12px;
+    color: #888;
+    margin-top: 5px;
+}
+
+.comment-form {
+    display: flex;
+    align-items: flex-start;
+    margin-top: 30px;
+}
+
+.comment-form .avatar {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+.comment-form input,
+.comment-form textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.comment-form textarea {
+    resize: vertical;
+}
+
+.comment-form button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.comment-form button:hover {
+    background-color: #45a049;
+}
+
+
+/* Create post styles */
+
+.create-post-form {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.create-post-form h2 {
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.form-group textarea {
+    resize: vertical;
+    height: 150px;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+
 /* Responsive */
 
 @media (max-width: 350px) {
+
     nav .menu-icon,
     nav .cancel-icon,
     nav .search-icon {
         margin: 0 10px;
-        font-size: 25px;
+        font-size: 16px;
     }
 }
 
 @media (max-width: 700px) {
+    nav .logo {
+        font-size: 20px;
+    }
     .widget {
         display: none;
+    }
+
+    .post {
+        margin-right: 0;
     }
 }
 
 @media (max-width: 980px) {
+
     nav .menu-icon,
     nav .cancel-icon,
     nav .search-icon {
@@ -481,15 +572,13 @@ form .error-msg {
     nav form {
         right: 30px;
     }
-}
 
-@media (max-width: 1245px) {
-    nav {
-        padding: 0 50px;
+    .widget {
+        margin-right: 30px;
     }
 }
 
-@media (max-width: 1840px) {
+@media (max-width: 1140px) {
     nav img {
         display: none;
     }
@@ -500,7 +589,6 @@ form .error-msg {
 
     nav .logo {
         flex: 2;
-        font-size: 25px;
         text-align: center;
     }
 
@@ -541,7 +629,7 @@ form .error-msg {
     }
 
     nav form.active {
-        top: 95px;
+        top: 140px;
         opacity: 1;
         pointer-events: auto;
     }
@@ -590,8 +678,25 @@ form .error-msg {
     nav .cancel-icon.show {
         display: block;
     }
+}
+
+@media (max-width: 1245px) {
+    nav {
+        padding: 0 50px;
+    }
 
     .post-container {
         display: block;
+    }
+}
+
+@media (max-width: 1500px) {
+    .post-container {
+        display: block;
+        margin: 100px 10px;
+    }
+
+    nav form {
+        margin-top: 20px;
     }
 }
