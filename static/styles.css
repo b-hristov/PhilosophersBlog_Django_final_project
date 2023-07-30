@@ -256,10 +256,6 @@ footer p {
     color: #666;
 }
 
-.entry-meta .fa {
-    margin-right: 5px;
-}
-
 .entry-content {
     line-height: 1.6;
     color: #444;
@@ -296,10 +292,6 @@ footer p {
     background-color: #fff;
     padding: 20px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.post-categories {
-    margin-left: 10px;
 }
 
 
@@ -341,9 +333,21 @@ footer p {
     color: #007bff;
 }
 
+/* Styles for the pagination */
+
+.page-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    margin-left: 15rem;
+    margin-bottom: 2rem;
+}
+
 .pagination {
-    padding-bottom: 50px;
-    padding-left: 30px;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 /* Styles for the greeting banner */
@@ -376,10 +380,11 @@ footer p {
 }
 
 /* Styles for the icons */
+.post-categories,
+.post-author,
 .post-comments,
 .post-likes {
     margin-right: 10px;
-    margin-left: 10px;
     color: #666;
 }
 
@@ -690,7 +695,11 @@ button:hover {
     }
 }
 
-@media (max-width: 1500px) {
+@media (max-width: 1700px) {
+    .page-content {
+        align-items: center;
+        margin-left: 0;
+    }
     .post-container {
         display: block;
         margin: 100px 10px;
