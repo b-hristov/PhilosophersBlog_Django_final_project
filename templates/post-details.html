@@ -3,27 +3,21 @@
 {% block content %}
     <div class="post-content">
         <div class="post-container">
-            <article class="post hentry" itemscope="" itemprop="blogPost" itemtype="http://schema.org/BlogPosting">
+            <article class="post-details">
                 <!-- Rest of the content from the original post here -->
                 <header class="entry-header">
-                    <h2 class="entry-title" itemprop="headline">Blog Post Title</h2>
+                    <h2 class="entry-title" itemprop="headline">{{ post.title }}</h2>
                     <div class="entry-meta">
                         <span class="post-date">
-                            <i class="fa-solid fa-clock"></i> <span class="updated">12th February 2015</span>
+                            <i class="fa-solid fa-clock"></i> <span class="updated">{{ post.created_on|date:"d M Y" }}</span>
                         </span>
                         <span class="post-categories">
-                            <i class="fa fa-folder fa-fw"></i> <a href="blog.html" rel="tag">Category A</a>,
+                            <i class="fa fa-folder fa-fw"></i> <a href="#" rel="tag">{{ post.category }}</a>
                         </span>
 
-                        <span class="post-comments">
-                                <i class="fa fa-comments fa-fw"></i> 10
-                             </span>
                         <span class="post-likes">
-                                <i class="fa fa-thumbs-up fa-fw"></i> 25
+                                <i class="fa fa-thumbs-up fa-fw"></i> {{ post.like_set.count }}
                             </span>
-                        <!-- Add "Read more" button -->
-                        <a href="blog-post.html" class="read-more">Read full post <i class="fa fa-arrow-right"></i></a>
-
                     </div>
                 </header>
 
@@ -34,80 +28,45 @@
                 </div>
 
                 <div class="entry-content" itemprop="articleBody">
-                    <p>Lorem ipsum dolor sit amet, orci a faucibus, ante curabitur augue ornare nulla facilisi
-                        bibendum,
-                        tortor felis quam rutrum velit, pretium posuere placerat. Vitae ut nulla eget. Lacus sociis,
-                        eget dolor metus nam nunc leo. Tempor eget donec officia. Luctus nullam purus urna iaculis,
-                        integer dui risus, ultricies lacinia aliquet.</p>
-                    <p>Lorem ipsum dolor sit amet, orci a faucibus, ante curabitur augue ornare nulla facilisi
-                        bibendum,
-                        tortor felis quam rutrum velit, pretium posuere placerat. Vitae ut nulla eget. Lacus sociis,
-                        eget dolor metus nam nunc leo. Tempor eget donec officia. Luctus nullam purus urna iaculis,
-                        integer dui risus, ultricies lacinia aliquet.</p>
-                    <p>Lorem ipsum dolor sit amet, orci a faucibus, ante curabitur augue ornare nulla facilisi
-                        bibendum,
-                        tortor felis quam rutrum velit, pretium posuere placerat. Vitae ut nulla eget. Lacus sociis,
-                        eget dolor metus nam nunc leo. Tempor eget donec officia. Luctus nullam purus urna iaculis,
-                        integer dui risus, ultricies lacinia aliquet.</p>
+                    <p>{{ post.content }}</p>
                 </div>
 
-                <div class="entry-comments">
-                    <h3>Comments</h3>
+                <div class="comment-section">
+                    <h2>Comments</h2>
+                    <hr>
+
+                    <!-- Sample Comments -->
                     <div class="comment">
-                        <div class="comment-author">
-                            <img src="path/to/user-avatar.jpg" alt="User Avatar">
-                            <span class="author-name">John Doe</span>
-                        </div>
-                        <div class="comment-content">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                            <span class="comment-date">Posted on: 20th June 2023</span>
+                        <img src="{% static 'images/sample-avatar.jpg' %}" alt="Avatar" class="avatar">
+                        <div class="comment-details">
+                            <p class="comment-author">John Doe</p>
+                            <p class="comment-date">Posted on July 28, 2023</p>
+                            <p class="comment-text">This is a sample comment. Lorem ipsum dolor sit amet, consectetur
+                                adipiscing elit.</p>
                         </div>
                     </div>
 
-                    <!-- More comments can be added here -->
+                    <div class="comment">
+                        <img src="{% static 'images/sample-avatar.jpg' %}" alt="Avatar" class="avatar">
+                        <div class="comment-details">
+                            <p class="comment-author">Jane Smith</p>
+                            <p class="comment-date">Posted on July 27, 2023</p>
+                            <p class="comment-text">Great article! Thanks for sharing this valuable information. </p>
+                        </div>
+                    </div>
+
+                    <!-- New Comment Form -->
+                    <h3>Add a Comment</h3>
+                    <form class="comment-form">
+                        <img src="{% static 'images/sample-avatar.jpg' %}" alt="Your Avatar" class="avatar">
+                        <div class="comment-details">
+                            <textarea name="comment" placeholder="Your Comment" required></textarea>
+                            <button type="submit">Post Comment</button>
+                        </div>
+                    </form>
                 </div>
 
             </article>
         </div>
     </div>
-    <style>
-        /* Existing CSS styles for post-content and post-container remain the same */
-
-        .entry-comments {
-            margin-top: 30px;
-        }
-
-        .entry-comments h3 {
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-
-        .comment {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 20px;
-        }
-
-        .comment-author img {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            margin-right: 10px;
-        }
-
-        .author-name {
-            font-weight: bold;
-        }
-
-        .comment-content p {
-            margin-bottom: 5px;
-        }
-
-        .comment-date {
-            font-size: 0.8rem;
-            color: #888;
-        }
-
-    </style>
 {% endblock %}
