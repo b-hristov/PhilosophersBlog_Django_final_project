@@ -62,3 +62,4 @@ class CreatePostForm(forms.ModelForm):
             self._save_m2m()
 
         return post
+
