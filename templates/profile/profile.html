@@ -4,41 +4,36 @@
     <div class="profile-container">
         <section class="profile-info">
             <div class="profile-image">
-
                 <img src="{% static 'images/sample-avatar.jpg' %}" alt="Profile Image">
             </div>
+
             <div class="personal-info">
                 <h2>Profile info</h2>
                 <hr>
-                <p><strong>First Name:</strong> Jon</p>
-                <p><strong>Last Name:</strong> Doe</p>
-                <p><strong>Date of Birth:</strong> January 1, 1990</p>
+                <p><strong>First Name:</strong> {{ profile.first_name }}</p>
+                <p><strong>Last Name:</strong> {{ profile.last_name }}</p>
+                <p><strong>Date of Birth:</strong> {{ profile.date_of_birth }}</p>
                 <p><strong>Username:</strong> {{ request.user }}</p>
-                <p><strong>Email:</strong> john.doe@example.com</p>
+                <p><strong>Email:</strong> {{ profile.email }}</p>
                 <div class="profile-buttons">
-                    <button class="edit-button">Edit Profile</button>
-                    <button class="delete-button">Delete Profile</button>
+                    <a href="#" class="edit-button">Edit Profile</a>
+                    <a href="#" class="delete-button">Delete Profile</a>
                 </div>
             </div>
         </section>
+
+        <div style="display: contents;">
+            <h2>My Posts</h2>
+            <hr style="width: 100%;">
+        </div>
+
         <section class="posts">
-            <h2>Posts</h2>
-            <hr>
-            <!-- Add posts here -->
-            <div class="post">
-                <h3>Post Title 1</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </div>
-{#            <div class="post">#}
-{#                <h3>Post Title 2</h3>#}
-{#                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>#}
-{#            </div>#}
-            <!-- Add more posts here -->
+            {% for post in posts %}
+                <div class="post">
+                    <h3>{{ post.title }}</h3>
+                    <p>{{ post.content | truncatechars:200 }}</p>
+                </div>
+            {% endfor %}
         </section>
-
     </div>
-
-    <style>
-
-    </style>
 {% endblock %}
