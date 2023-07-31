@@ -17,7 +17,6 @@ class IndexView(ListView):
         context = super().get_context_data(**kwargs)
         context['user'] = self.request.user
         context['categories'] = Category.objects.all()
-        # context['posts'] = Post.objects.all()
         return context
 
 
