@@ -10,7 +10,7 @@ UserModel = get_user_model()
 
 
 class CreateUserView(CreateView):
-    template_name = 'register.html'
+    template_name = 'profile/register.html'
     form_class = RegisterUserForm
     success_url = reverse_lazy('index')
 
@@ -22,7 +22,7 @@ class CreateUserView(CreateView):
 
 
 class LoginView(LoginView):
-    template_name = 'login.html'
+    template_name = 'profile/login.html'
     form_class = LoginForm
     success_url = reverse_lazy('index')
 
@@ -37,4 +37,4 @@ class LogOutView(LogoutView):
 
 
 class ProfileView(TemplateView):
-    template_name = 'profile.html'
+    template_name = 'profile/profile.html'

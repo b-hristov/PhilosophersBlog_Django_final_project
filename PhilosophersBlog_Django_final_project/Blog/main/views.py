@@ -7,7 +7,7 @@ from PhilosophersBlog_Django_final_project.Blog.main.models import Post, Categor
 
 
 class IndexView(ListView):
-    template_name = 'index.html'
+    template_name = 'main/index.html'
     model = Post
     context_object_name = 'posts'
     paginate_by = 10
@@ -21,12 +21,8 @@ class IndexView(ListView):
         return context
 
 
-# class PostDetailsView(TemplateView):
-#     template_name = 'post-details.html'
-
-
 class CreatePostView(CreateView):
-    template_name = 'create-post.html'
+    template_name = 'post/create-post.html'
     form_class = CreatePostForm
     success_url = reverse_lazy('index')  # to be changed later to reverse_lazy('my_posts')
 
@@ -37,7 +33,7 @@ class CreatePostView(CreateView):
 
 
 class PostDetailsView(DetailView):
-    template_name = 'post-details.html'
+    template_name = 'post/post-details.html'
     model = Post
     context_object_name = 'post'
 
