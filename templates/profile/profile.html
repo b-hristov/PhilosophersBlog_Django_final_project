@@ -4,7 +4,7 @@
     <div class="profile-container">
         <section class="profile-info">
             <div class="profile-image">
-                <img src="{% static 'images/sample-avatar.jpg' %}" alt="Profile Image">
+                <img src="{{ profile.image }}" alt="Profile Image">
             </div>
 
             <div class="personal-info">
@@ -16,8 +16,8 @@
                 <p><strong>Username:</strong> {{ request.user }}</p>
                 <p><strong>Email:</strong> {{ profile.email }}</p>
                 <div class="profile-buttons">
-                    <a href="#" class="edit-button">Edit Profile</a>
-                    <a href="#" class="delete-button">Delete Profile</a>
+                    <a href="{% url 'edit_profile' %}" class="edit-button">Edit Profile</a>
+                    <a href="{% url 'delete_profile' %}" class="delete-button">Delete Profile</a>
                 </div>
             </div>
         </section>

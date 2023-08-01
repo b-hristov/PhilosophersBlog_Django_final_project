@@ -1,13 +1,13 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth import login, get_user_model
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import DetailView, TemplateView, ListView
-from django.views.generic.edit import CreateView
-from .forms import RegisterUserForm, LoginForm
-from .models import Profile
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from .forms import RegisterUserForm, LoginForm, EditProfileForm
+from .models import Profile, BlogUser
 from ..main.models import Post
 
 UserModel = get_user_model()
@@ -47,6 +47,31 @@ class ProfileView(LoginRequiredMixin, View):
         profile = request.user.profile
         posts = Post.objects.filter(user=request.user).order_by('-created_on')
         return render(request, self.template_name, {'profile': profile, 'posts': posts})
+
+
+class EditProfileView(LoginRequiredMixin, UpdateView):
+    model = Profile
+    form_class = EditProfileForm
+    template_name = 'profile/edit-profile.html'
+    success_url = reverse_lazy('profile')
+
+    def get_object(self, queryset=None):
+        return self.request.user.profile
+
+
+class DeleteProfileView(LoginRequiredMixin, DeleteView):
+    model = BlogUser
+    template_name = 'profile/delete-profile.html'
+    success_url = reverse_lazy('index')
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        self.object.profile.delete()
+        self.object.delete()
+        return redirect(self.success_url)
 
 
 class MyPostsView(LoginRequiredMixin, ListView):

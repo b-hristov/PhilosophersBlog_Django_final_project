@@ -249,6 +249,48 @@ footer p {
     background-color: #910303;
 }
 
+.save-button {
+    padding: 0.5rem 1rem;
+    margin-right: 1rem;
+    background-color: #039c12;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.save-button:hover {
+    background-color: #01510d;
+}
+
+.cancel-button {
+    padding: 0.7rem 1rem;
+    margin-right: 1rem;
+    background-color: #dc3545;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.cancel-button:hover {
+    background-color: #545b62;
+}
+
+.del-button-yes {
+    padding: 0.5rem 1rem;
+    margin-right: 1rem;
+    background-color: #9d10d3;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.del-button-yes:hover {
+    background-color: #4900b4;
+}
+
 
 /* Styling for the blog posts */
 
@@ -570,6 +612,7 @@ button:hover {
     nav .logo {
         font-size: 20px;
     }
+
     .widget {
         display: none;
     }
@@ -718,6 +761,7 @@ button:hover {
         align-items: center;
         margin-left: 0;
     }
+
     .post-container {
         display: block;
         margin: 100px 10px;

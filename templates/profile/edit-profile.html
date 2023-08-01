@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    {{ form.media }}
+    <div class="profile-container">
+        <section class="profile-info">
+            <div class="profile-image">
+                <img src="{% static 'images/sample-avatar.jpg' %}" alt="Profile Image">
+            </div>
+
+            <div class="personal-info">
+                <h2>Edit Profile</h2>
+                <hr>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="save-button">Save Changes</button>
+                    <a href="{% url 'profile' %}" class="cancel-button">Cancel</a>
+                </form>
+            </div>
+        </section>
+    </div>
+{% endblock %}
