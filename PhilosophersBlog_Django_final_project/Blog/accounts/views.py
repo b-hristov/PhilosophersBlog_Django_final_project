@@ -58,6 +58,14 @@ class EditProfileView(LoginRequiredMixin, UpdateView):
     def get_object(self, queryset=None):
         return self.request.user.profile
 
+    def form_valid(self, form):
+        profile = form.save(commit=False)
+        profile.user = self.request.user
+        if 'image' in self.request.FILES:
+            profile.image = self.request.FILES['image']
+        profile.save()
+        return super().form_valid(form)
+
 
 class DeleteProfileView(LoginRequiredMixin, DeleteView):
     model = BlogUser

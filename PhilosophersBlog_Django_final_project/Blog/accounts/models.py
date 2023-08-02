@@ -2,7 +2,7 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.db import models
 
 from PhilosophersBlog_Django_final_project.Blog.accounts.managers import BlogUserManager
-from PhilosophersBlog_Django_final_project.Blog.main.validators import validate_letters, clean_avatar
+from PhilosophersBlog_Django_final_project.Blog.main.validators import validate_names, clean_avatar
 
 
 class BlogUser(AbstractBaseUser, PermissionsMixin):
@@ -29,17 +29,17 @@ class Profile(models.Model):
 
     first_name = models.CharField(
         max_length=25,
-        validators=(validate_letters,)
+        validators=(validate_names,)
     )
 
     last_name = models.CharField(
         max_length=25,
-        validators=(validate_letters,)
+        validators=(validate_names,)
     )
 
     image = models.ImageField(
-        upload_to='media',
-        default='static/images/avatar.png',
+        upload_to='profile_avatars',
+        default='default_avatar/sample-avatar.jpg',
         null=True,
         blank=True,
         validators=(

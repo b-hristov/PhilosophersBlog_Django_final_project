@@ -4,7 +4,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.core.exceptions import ValidationError
 
 from PhilosophersBlog_Django_final_project.Blog.accounts.models import Profile
-from PhilosophersBlog_Django_final_project.Blog.main.validators import validate_letters, clean_avatar
+from PhilosophersBlog_Django_final_project.Blog.main.validators import validate_names
 
 
 UserModel = get_user_model()
@@ -20,14 +20,14 @@ class RegisterUserForm(UserCreationForm):
     first_name = forms.CharField(
         max_length=25,
         validators=(
-            validate_letters,
+            validate_names,
         )
     )
 
     last_name = forms.CharField(
         max_length=25,
         validators=(
-            validate_letters,
+            validate_names,
         )
     )
 
