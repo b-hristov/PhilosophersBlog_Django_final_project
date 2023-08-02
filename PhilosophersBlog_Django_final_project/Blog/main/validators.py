@@ -2,7 +2,7 @@ from django.core.exceptions import ValidationError
 from PIL import Image
 
 
-def validate_letters(value):
+def validate_names(value):
     for char in value:
         if not char.isalpha():
             raise ValidationError('The name must contain only letters.')
@@ -16,4 +16,3 @@ def clean_avatar(avatar):
         img_width, img_height = image.size
         if img_width > 1920 or img_height > 1080:
             raise ValidationError("The image dimensions should not exceed 1920x1080.")
-
