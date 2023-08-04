@@ -691,7 +691,7 @@ button:hover {
     }
 }
 
-@media (max-width: 1140px) {
+@media (max-width: 1380px) {
     nav img {
         display: none;
     }
@@ -791,15 +791,15 @@ button:hover {
     nav .cancel-icon.show {
         display: block;
     }
+
+    .widget {
+        display: none;
+    }
 }
 
 @media (max-width: 1245px) {
     nav {
         padding: 0 0;
-    }
-
-    .widget {
-        display: none;
     }
 
     .post-container {

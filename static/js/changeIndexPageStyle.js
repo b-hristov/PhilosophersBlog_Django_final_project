@@ -6,7 +6,6 @@ const numPosts = posts.length;
 if (numPosts === 1) {
     posts[0].style.maxWidth = 'none';
     posts[0].style.flexBasis = 'auto';
-    posts[0].style.maxWidth = '600px';
     posts[0].style.maxheight = '300px';
     categoriesWidget.remove()
     pageContent.style.margin = '0';
