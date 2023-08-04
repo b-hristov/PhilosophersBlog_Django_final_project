@@ -4,8 +4,8 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.core.exceptions import ValidationError
 
 from PhilosophersBlog_Django_final_project.Blog.accounts.models import Profile
+from PhilosophersBlog_Django_final_project.Blog.accounts.widgets import ClearRedundantImageFieldsWidget
 from PhilosophersBlog_Django_final_project.Blog.main.validators import validate_names
-
 
 UserModel = get_user_model()
 
@@ -32,13 +32,6 @@ class RegisterUserForm(UserCreationForm):
     )
 
     email = forms.EmailField()
-
-    # image = forms.ImageField(
-    #     # required=False,
-    #     validators=(
-    #         clean_avatar,
-    #     )
-    # )
 
     date_of_birth = forms.DateField()
 
@@ -76,3 +69,24 @@ class EditProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['first_name', 'last_name', 'date_of_birth', 'email', 'image']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['first_name'].widget.attrs.update({
+            'class': 'form-control',
+            'placeholder': 'Enter your first name',
+        })
+        self.fields['last_name'].widget.attrs.update({
+            'class': 'form-control',
+            'placeholder': 'Enter your last name',
+        })
+        self.fields['date_of_birth'].widget.attrs.update({
+            'class': 'form-control',
+            'placeholder': 'Enter your birthday',
+        })
+        self.fields['email'].widget.attrs.update({
+            'class': 'form-control',
+            'placeholder': 'Enter your email address',
+        })
+
+    image = forms.ImageField(widget=ClearRedundantImageFieldsWidget)
