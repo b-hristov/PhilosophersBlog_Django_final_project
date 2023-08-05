@@ -88,5 +88,8 @@ class EditProfileForm(forms.ModelForm):
             'class': 'form-control',
             'placeholder': 'Enter your email address',
         })
+        self.fields['image'].widget.attrs.update({
+            'class': 'form-control'
+        })
 
     image = forms.ImageField(widget=ClearRedundantImageFieldsWidget)
