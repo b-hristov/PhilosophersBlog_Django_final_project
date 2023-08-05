@@ -35,19 +35,10 @@
                                     <span class="post-likes"><i class="fa fa-thumbs-up fa-fw"></i>
                                     {{ post.comment_set.count }}
                                 </span>
-
-
                                 </div>
                             </header>
-
-                            {#                        <div class="entry-image">#}
-                            {#                            <img src="http://dummyimage.com/800x250/f3f3f3/d1d1d1.jpg&amp;text=Featured+Image"#}
-                            {#                                 alt="Blog Post"#}
-                            {#                                 itemprop="image">#}
-                            {#                        </div>#}
-
-                            <div class="entry-content" itemprop="articleBody">
-                                <p>{{ post.content | truncatechars:500 }}</p>
+                            <div class="entry-content-all" itemprop="articleBody">
+                                <p>{{ post.content | truncatechars:500 | safe }}</p>
                             </div>
                             <a href="{% url 'post_details' pk=post.pk %}" class="read-more">Read full post
                                 <i class="fa fa-arrow-right"></i>
@@ -62,17 +53,6 @@
                         {% for category in categories %}
                             <li><a href="#">{{ category.title }}</a></li>
                         {% endfor %}
-                        {#                    <li><a href="#">Ethics</a></li>#}
-                        {#                    <li><a href="#">Epistemology</a></li>#}
-                        {#                    <li><a href="#">Metaphysics</a></li>#}
-                        {#                    <li><a href="#">Political Philosophy</a></li>#}
-                        {#                    <li><a href="#">Aesthetics</a></li>#}
-                        {#                    <li><a href="#">Philosophy of Science</a></li>#}
-                        {#                    <li><a href="#">Philosophy of Religion</a></li>#}
-                        {#                    <li><a href="#">Existentialism</a></li>#}
-                        {#                    <li><a href="#">Eastern Philosophy</a></li>#}
-                        {#                    <li><a href="#">Feminist Philosophy</a></li>#}
-                        {#                    <li><a href="#">Memes</a></li>#}
                     </ul>
                 </div>
             </div>
@@ -129,8 +109,58 @@
         <script src="{% static 'js/changeIndexPageStyle.js' %}"></script>
 
     {% else %}
-        <p>Hello, dear friend!</p>
-        <p>Please login to view the articles.</p>
+        <p>Please login to view all the articles on the site.</p>
+        <div class="page-content">
+            <div class="post-content">
+                <div class="post-container">
+                    {% for post in posts %}
+                        <article class="post entry">
+
+                            <header class="entry-header">
+                                <h2 class="entry-title" itemprop="headline">{{ post.title }}</h2>
+                                <div class="entry-meta">
+                                <span class="post-author"><i class="fa-solid fa-user"></i>
+{#                                    <a href="{% url 'profile' post.user.pk %}"> {{ post.user }} </a>#}
+                                    <a href="#"> {{ post.user }} </a>
+                                </span>
+
+                                    <span class="post-date"><i class="fa-solid fa-clock"></i>
+                                    <span class="updated">{{ post.created_on|date:"d M Y" }}</span>
+                                </span>
+
+                                    <span class="post-categories"><i class="fa fa-folder fa-fw"></i>
+                                    <a href="#" rel="tag">{{ post.category }}</a>
+                                </span>
+
+                                    <span class="post-comments"><i class="fa fa-comments fa-fw"></i>
+                                    {{ post.like_set.count }}
+                                </span>
+                                    <span class="post-likes"><i class="fa fa-thumbs-up fa-fw"></i>
+                                    {{ post.comment_set.count }}
+                                </span>
+                                </div>
+                            </header>
+                            <div class="entry-content-all" itemprop="articleBody">
+                                <p>{{ post.content | truncatechars:500 | safe }}</p>
+                            </div>
+                            <a href="{% url 'post_details' pk=post.pk %}" class="read-more">Read full post
+                                <i class="fa fa-arrow-right"></i>
+                            </a>
+                        </article>
+                    {% endfor %}
+                </div>
+                <div class="widget">
+                    <h3 class="widget-title">Categories</h3>
+                    <ul>
+                        <li><a href="#">All</a></li>
+                        {% for category in categories %}
+                            <li><a href="#">{{ category.title }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
     {% endif %}
+
 
 {% endblock %}

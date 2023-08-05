@@ -311,10 +311,10 @@ footer p {
     word-wrap: break-word;
 }
 
-.entry-image img {
-    width: 100%;
+.entry-content img {
     height: auto;
-    margin-bottom: 15px;
+    max-width: 100%;
+    display: block;
 }
 
 .post-content {
@@ -341,6 +341,17 @@ footer p {
     background-color: #fff;
     padding: 20px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.entry-content-all img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.entry-content-all {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 
@@ -545,6 +556,7 @@ footer p {
 .content-wrap {
     display: block;
     margin-bottom: 100px;
+    width: 80%;
 }
 
 
@@ -594,6 +606,26 @@ button {
 button:hover {
     background-color: #45a049;
 }
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 10px;
+    margin: 0 5% 5%;
+}
+
+.content button {
+    margin: 0 auto;
+    font-size: x-large;
+}
+
+.tox-tinymce {
+    width: 100%;
+}
+
 
 /* Edit profile page */
 
@@ -689,6 +721,21 @@ button:hover {
     .widget {
         margin-right: 30px;
     }
+}
+
+@media (max-width: 1245px) {
+    nav {
+        padding: 0 0;
+    }
+
+    .post-container {
+        display: block;
+    }
+
+    /*.post {*/
+    /*    width: 600px;*/
+    /*    height: 300px;*/
+    /*}*/
 }
 
 @media (max-width: 1380px) {
@@ -795,21 +842,10 @@ button:hover {
     .widget {
         display: none;
     }
-}
 
-@media (max-width: 1245px) {
-    nav {
-        padding: 0 0;
+    .content {
+        margin: 0 5% 10%;
     }
-
-    .post-container {
-        display: block;
-    }
-
-    /*.post {*/
-    /*    width: 600px;*/
-    /*    height: 300px;*/
-    /*}*/
 }
 
 @media (max-width: 1600px) {
