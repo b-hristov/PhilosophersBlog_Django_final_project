@@ -1,46 +1,28 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-    <div class="create-post-form">
-        <h2>Create a New Post</h2>
-        <hr>
-
-        <form method="post" action="{% url 'create_post' %}">
-{#            {{ form.as_p }}#}
+    <form method="post" action="{% url 'create_post' %}">
+        <div class="create-post-form">
+            <h2>Create a New Post</h2>
+            <hr>
             {% csrf_token %}
-            <div class="form-group">
-                <label for="post-title">Title</label>
-                {{ form.title }}
-{#                <input type="text" id="post-title" name="{{ form.title }}" required>#}
+            <div>
+                <div class="form-group">
+                    <label for="post-title">Title</label>
+                    {{ form.title }}
+                </div>
+                <div class="form-group">
+                    <label for="category">Category</label>
+                    {{ form.category }}
+                </div>
             </div>
-            <div class="form-group">
-                <label for="category">Category</label>
-                {{ form.category }}
-{#                <input type="text" id="category" name="{{ form.category }}" required>#}
-            </div>
-            <div class="form-group">
-                <label for="post-content">Content</label>
-                {{ form.content }}
-{#                <textarea id="post-content" name="{{ form.content }}" required></textarea>#}
-            </div>
+        </div>
+        <div class="content">
+            {{ form.media }}
+            <label for="post-content"><b>Content</b></label>
+            {{ form.content }}
             <button type="submit">Create Post</button>
-        </form>
-    </div>
-{#    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js"></script>#}
-{#    <script>#}
-{#        // Initialize TinyMCE#}
-{#        tinymce.init({#}
-{#            selector: 'textarea#id_content',#}
-{#            plugins: 'link image lists',#}
-{#            toolbar: 'undo redo | styleselect | bold italic | bullist numlist | link image',#}
-{#            menubar: false#}
-{#        });#}
-{##}
-{#        function removeNotification() {#}
-{#                setTimeout(function () {#}
-{#                    document.querySelector(".tox-notification").remove();#}
-{#                }, 300); // Adjust the delay as needed#}
-{#            }#}
-{#        removeNotification()#}
-{#    </script>#}
+        </div>
+    </form>
+    <script src="{% static 'js/handlePaste.js' %}"></script>
 {% endblock %}

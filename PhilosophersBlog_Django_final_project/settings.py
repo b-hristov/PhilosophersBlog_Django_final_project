@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'PhilosophersBlog_Django_final_project.Blog.main',
-    'PhilosophersBlog_Django_final_project.Blog.accounts'
+    'PhilosophersBlog_Django_final_project.Blog.accounts',
+    'tinymce'
 ]
 
 MIDDLEWARE = [
@@ -146,3 +147,12 @@ LOGIN_REQUIRED_REDIRECT = 'login'
 
 LOGIN_URL = reverse_lazy('login')
 LOGOUT_URL = reverse_lazy('logout')
+
+TINYMCE_DEFAULT_CONFIG = {
+    'height': 400,
+    'plugins': 'textcolor ink image lists preview',
+    'toolbar': 'preview | undo redo | styleselect | forecolor backcolor | bold italic '
+               '| fontsizeselect | bullist numlist | link image',
+    'menubar': False,
+    'setup': 'function(editor) { editor.on("paste", handlePaste); }',
+}

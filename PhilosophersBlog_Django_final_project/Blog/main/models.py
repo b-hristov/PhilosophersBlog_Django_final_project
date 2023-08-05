@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.db import models
+from tinymce import models as tinymce_models
 
 UserModel = get_user_model()
 
@@ -22,7 +23,7 @@ class Post(models.Model):
         max_length=200,
     )
 
-    content = models.TextField()
+    content = tinymce_models.HTMLField()
 
     category = models.ForeignKey(
         Category,

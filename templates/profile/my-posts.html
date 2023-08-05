@@ -35,14 +35,8 @@
                             </div>
                         </header>
 
-                        {#                        <div class="entry-image">#}
-                        {#                            <img src="http://dummyimage.com/800x250/f3f3f3/d1d1d1.jpg&amp;text=Featured+Image"#}
-                        {#                                 alt="Blog Post"#}
-                        {#                                 itemprop="image">#}
-                        {#                        </div>#}
-
-                        <div class="entry-content" itemprop="articleBody">
-                            <p>{{ post.content | truncatechars:500 }}</p>
+                        <div class="entry-content-all" itemprop="articleBody">
+                            <p>{{ post.content | truncatechars:500 | safe}}</p>
                         </div>
                         <a href="{% url 'post_details' pk=post.pk %}" class="read-more">Read full post
                             <i class="fa fa-arrow-right"></i>

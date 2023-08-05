@@ -21,14 +21,8 @@
                     </div>
                 </header>
 
-                <div class="entry-image">
-                    <img src="http://dummyimage.com/800x250/f3f3f3/d1d1d1.jpg&amp;text=Featured+Image"
-                         alt="Blog Post"
-                         itemprop="image">
-                </div>
-
                 <div class="entry-content" itemprop="articleBody">
-                    <p>{{ post.content }}</p>
+                    {{ post.content | safe }}
                 </div>
 
                 <div class="comment-section">

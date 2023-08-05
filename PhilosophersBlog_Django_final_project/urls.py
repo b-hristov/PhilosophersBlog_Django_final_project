@@ -25,4 +25,5 @@ urlpatterns = [
     path('', include('PhilosophersBlog_Django_final_project.Blog.main.urls')),
     path('', include('PhilosophersBlog_Django_final_project.Blog.accounts.urls')),
     path('', include('django.contrib.auth.urls')),
+    path('tinymce/', include('tinymce.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
