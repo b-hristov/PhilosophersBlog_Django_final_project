@@ -4,7 +4,6 @@
     <div class="post-content">
         <div class="post-container content-wrap">
             <article class="post-details">
-                <!-- Rest of the content from the original post here -->
                 <header class="entry-header">
                     <h2 class="post-title" itemprop="headline">{{ post.title }}</h2>
                     <div class="entry-meta">
@@ -17,7 +16,8 @@
                             <b>Created on:</b> <span class="updated">{{ post.created_on|date:"d M Y" }}</span>
                         </span>
                         <span class="post-categories">
-                            <b>Category:</b> <i class="fa fa-folder fa-fw"></i> <a href="#" rel="tag">{{ post.category }}</a>
+                            <b>Category:</b> <i class="fa fa-folder fa-fw"></i>
+                            <a href="#" rel="tag">{{ post.category }}</a>
                         </span>
                         <span class="post-likes">
                             <i class="fa fa-thumbs-up fa-fw"></i><b>Total likes:</b> {{ post.like_set.count }}
@@ -44,37 +44,28 @@
                     </div>
                 {% endif %}
 
-                <div class="comment-section">
+                <div id="comments" class="comment-section">
                     <h2>Comments</h2>
                     <hr>
-
-                    <!-- Sample Comments -->
-                    <div class="comment">
-                        <img src="{% static 'images/sample-avatar.jpg' %}" alt="Avatar" class="avatar">
-                        <div class="comment-details">
-                            <p class="comment-author">John Doe</p>
-                            <p class="comment-date">Posted on July 28, 2023</p>
-                            <p class="comment-text">This is a sample comment. Lorem ipsum dolor sit amet, consectetur
-                                adipiscing elit.</p>
+                    {% for comment in post.comment_set.all %}
+                        <div class="comment">
+                            <img src="{{ comment.user.profile.image.url }}" alt="Avatar" class="avatar">
+                            <div class="comment-details">
+                                <p class="comment-author">{{ comment.user.username }}</p>
+                                <p class="comment-date">Posted on {{ comment.created_on|date:"F d, Y H:i:s" }}</p>
+                                <p class="comment-text">{{ comment.content }}</p>
+                            </div>
                         </div>
-                    </div>
+                    {% endfor %}
 
-                    <div class="comment">
-                        <img src="{% static 'images/sample-avatar.jpg' %}" alt="Avatar" class="avatar">
-                        <div class="comment-details">
-                            <p class="comment-author">Jane Smith</p>
-                            <p class="comment-date">Posted on July 27, 2023</p>
-                            <p class="comment-text">Great article! Thanks for sharing this valuable information. </p>
-                        </div>
-                    </div>
-
-                    <!-- New Comment Form -->
                     <h3>Add a Comment</h3>
-                    <form class="comment-form">
-                        <img src="{% static 'images/sample-avatar.jpg' %}" alt="Your Avatar" class="avatar">
+                    <form class="comment-form" method="post" action="{% url 'create_comment' pk=post.pk %}#comments">
+                        {% csrf_token %}
+                        <img src="{{ user.profile.image.url }}" alt="Your Avatar" class="avatar">
                         <div class="comment-details">
-                            <textarea name="comment" placeholder="Your Comment" required></textarea>
-                            <button type="submit">Post Comment</button>
+                            <textarea name="content" placeholder="Your comment"
+                                      required></textarea>
+                            <button type="submit">Comment</button>
                         </div>
                     </form>
                 </div>

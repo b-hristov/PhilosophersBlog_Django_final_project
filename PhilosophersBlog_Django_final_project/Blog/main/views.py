@@ -1,9 +1,10 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.urls import reverse_lazy
+from django.shortcuts import get_object_or_404
+from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 
-from PhilosophersBlog_Django_final_project.Blog.main.forms import CreatePostForm
-from PhilosophersBlog_Django_final_project.Blog.main.models import Post, Category
+from PhilosophersBlog_Django_final_project.Blog.main.forms import CreatePostForm, CommentForm
+from PhilosophersBlog_Django_final_project.Blog.main.models import Post, Category, Comment
 
 
 class IndexView(ListView):
@@ -36,6 +37,11 @@ class PostDetailsView(LoginRequiredMixin, DetailView):
     model = Post
     context_object_name = 'post'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = CommentForm()
+        return context
+
 
 class EditPostView(LoginRequiredMixin, UpdateView):
     model = Post
@@ -50,3 +56,18 @@ class DeletePostView(DeleteView):
     model = Post
     template_name = 'post/delete-post.html'
     success_url = reverse_lazy('index')
+
+
+class CreateCommentView(CreateView):
+    model = Comment
+    form_class = CommentForm
+    template_name = 'post/post-details.html'
+
+    def form_valid(self, form):
+        post = get_object_or_404(Post, id=self.kwargs['pk'])
+        form.instance.post = post
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('post_details', kwargs={'pk': self.kwargs['pk']})

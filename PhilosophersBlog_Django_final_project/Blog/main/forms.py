@@ -1,6 +1,6 @@
 from django import forms
 
-from PhilosophersBlog_Django_final_project.Blog.main.models import Post, Category
+from PhilosophersBlog_Django_final_project.Blog.main.models import Post, Category, Comment
 
 
 class CreatePostForm(forms.ModelForm):
@@ -63,3 +63,10 @@ class CreatePostForm(forms.ModelForm):
 
         return post
 
+
+class CommentForm(forms.ModelForm):
+    content = forms.CharField(widget=forms.Textarea)
+
+    class Meta:
+        model = Comment
+        fields = ['content']
