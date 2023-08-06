@@ -6,24 +6,43 @@
             <article class="post-details">
                 <!-- Rest of the content from the original post here -->
                 <header class="entry-header">
-                    <h2 class="entry-title" itemprop="headline">{{ post.title }}</h2>
+                    <h2 class="post-title" itemprop="headline">{{ post.title }}</h2>
                     <div class="entry-meta">
+                        <span class="post-author"><i class="fa-solid fa-user"></i>
+{#                                    <a href="{% url 'profile' post.user.pk %}"> {{ post.user }} </a>#}
+                            <b>Author:</b> <a href="#"> {{ post.user }} </a>
+                        </span>
                         <span class="post-date">
-                            <i class="fa-solid fa-clock"></i> <span class="updated">{{ post.created_on|date:"d M Y" }}</span>
+                            <i class="fa-solid fa-clock"></i>
+                            <b>Created on:</b> <span class="updated">{{ post.created_on|date:"d M Y" }}</span>
                         </span>
                         <span class="post-categories">
-                            <i class="fa fa-folder fa-fw"></i> <a href="#" rel="tag">{{ post.category }}</a>
+                            <b>Category:</b> <i class="fa fa-folder fa-fw"></i> <a href="#" rel="tag">{{ post.category }}</a>
                         </span>
-
                         <span class="post-likes">
-                                <i class="fa fa-thumbs-up fa-fw"></i> {{ post.like_set.count }}
-                            </span>
+                            <i class="fa fa-thumbs-up fa-fw"></i><b>Total likes:</b> {{ post.like_set.count }}
+                        </span>
                     </div>
                 </header>
 
                 <div class="entry-content" itemprop="articleBody">
                     {{ post.content | safe }}
                 </div>
+
+                {% if user.is_authenticated and user == post.user %}
+                    <div class="post-actions">
+                        <a href="{% url 'edit_post' pk=post.pk %}" class="btn-edit btn btn-success"
+                           title="Edit Post">Edit Post <i class="fa fa-edit"></i></a>
+                        <a href="{% url 'delete_post' pk=post.pk %}" class="btn-delete btn btn-danger"
+                           title="Delete Post">Delete Post <i class="fa fa-trash"></i></a>
+                    </div>
+                {% endif %}
+
+                {% if user.is_authenticated and user != post.user %}
+                    <div class="post-like">
+                        <button class="btn-like" title="Like Post">Like <i class="fa fa-thumbs-up"></i></button>
+                    </div>
+                {% endif %}
 
                 <div class="comment-section">
                     <h2>Comments</h2>
