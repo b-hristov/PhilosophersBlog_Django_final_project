@@ -16,25 +16,24 @@
                             <header class="entry-header">
                                 <h2 class="entry-title" itemprop="headline">{{ post.title }}</h2>
                                 <div class="entry-meta">
-                                <span class="post-author"><i class="fa-solid fa-user"></i>
+                                    <span class="post-author"><i class="fa-solid fa-user"></i>
 {#                                    <a href="{% url 'profile' post.user.pk %}"> {{ post.user }} </a>#}
                                     <a href="#"> {{ post.user }} </a>
                                 </span>
-
                                     <span class="post-date"><i class="fa-solid fa-clock"></i>
                                     <span class="updated">{{ post.created_on|date:"d M Y" }}</span>
                                 </span>
-
                                     <span class="post-categories"><i class="fa fa-folder fa-fw"></i>
                                     <a href="#" rel="tag">{{ post.category }}</a>
                                 </span>
-
+                                </div>
+                                <div class="comments-and-likes">
                                     <span class="post-comments"><i class="fa fa-comments fa-fw"></i>
-                                    {{ post.like_set.count }}
-                                </span>
+                                        {{ post.comment_set.count }}
+                                    </span>
                                     <span class="post-likes"><i class="fa fa-thumbs-up fa-fw"></i>
-                                    {{ post.comment_set.count }}
-                                </span>
+                                        {{ post.like_set.count }}
+                                    </span>
                                 </div>
                             </header>
                             <div class="entry-content-all" itemprop="articleBody">
@@ -104,63 +103,32 @@
             </div>
         </div>
 
+        <button id="topButton" onclick="scrollToTop()">
+            <span><i class="fa-solid fa-angles-up"></i></span>
+        </button>
+
 
         <script src="{% static 'js/greetingBanner.js' %}"></script>
         <script src="{% static 'js/changeIndexPageStyle.js' %}"></script>
+        <script src="{% static 'js/goToTopButton.js' %}"></script>
 
     {% else %}
-        <p>Please login to view all the articles on the site.</p>
-        <div class="page-content">
-            <div class="post-content">
-                <div class="post-container">
-                    {% for post in posts %}
-                        <article class="post entry">
-
-                            <header class="entry-header">
-                                <h2 class="entry-title" itemprop="headline">{{ post.title }}</h2>
-                                <div class="entry-meta">
-                                <span class="post-author"><i class="fa-solid fa-user"></i>
-{#                                    <a href="{% url 'profile' post.user.pk %}"> {{ post.user }} </a>#}
-                                    <a href="#"> {{ post.user }} </a>
-                                </span>
-
-                                    <span class="post-date"><i class="fa-solid fa-clock"></i>
-                                    <span class="updated">{{ post.created_on|date:"d M Y" }}</span>
-                                </span>
-
-                                    <span class="post-categories"><i class="fa fa-folder fa-fw"></i>
-                                    <a href="#" rel="tag">{{ post.category }}</a>
-                                </span>
-
-                                    <span class="post-comments"><i class="fa fa-comments fa-fw"></i>
-                                    {{ post.like_set.count }}
-                                </span>
-                                    <span class="post-likes"><i class="fa fa-thumbs-up fa-fw"></i>
-                                    {{ post.comment_set.count }}
-                                </span>
-                                </div>
-                            </header>
-                            <div class="entry-content-all" itemprop="articleBody">
-                                <p>{{ post.content | truncatechars:500 | safe }}</p>
-                            </div>
-                            <a href="{% url 'post_details' pk=post.pk %}" class="read-more">Read full post
-                                <i class="fa fa-arrow-right"></i>
-                            </a>
-                        </article>
-                    {% endfor %}
-                </div>
-                <div class="widget">
-                    <h3 class="widget-title">Categories</h3>
-                    <ul>
-                        <li><a href="#">All</a></li>
-                        {% for category in categories %}
-                            <li><a href="#">{{ category.title }}</a></li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            </div>
+        <div class="blog-introduction">
+            <p class="blog-intro-text">Welcome to <strong>Philosopher Inside You</strong> - a vibrant community of
+                deep
+                thinkers and passionate writers! Unleash your inner philosopher and become a part of this
+                intellectual
+                journey. Join our community of curious minds, where you can share your thoughts, insights, and
+                unique
+                perspectives on life's most profound questions.</p>
+            <p class="blog-intro-text">Don't just read - <em>create!</em></p>
+            <p class="blog-intro-text"><a href="{% url 'register' %}">Register</a> now and start crafting your own
+                philosophical masterpieces. Engage in stimulating discussions, explore diverse philosophical topics,
+                and
+                enrich your understanding of the world. Let your ideas shine and inspire others on this platform of
+                knowledge and contemplation.</p>
+            <p class="blog-intro-text">Our community awaits your voice - together, let's cultivate a space for
+                wisdom and enlightenment.</p>
         </div>
     {% endif %}
-
-
 {% endblock %}
