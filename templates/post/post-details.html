@@ -42,9 +42,23 @@
                 {% endif %}
 
                 {% if user.is_authenticated and user != post.user %}
-                    <div class="post-like">
-                        <button class="btn-like" title="Like Post">Like <i class="fa fa-thumbs-up"></i></button>
-                    </div>
+                    {% if user_liked %}
+                        <div class="post-like">
+                            <a href="{% url 'like_post' post.pk %}"
+                               class="btn btn-outline-primary btn-lg"
+                               title="Unlike Post">
+                                Unlike  <i class="fa-solid fa-thumbs-down"></i>
+                            </a>
+                        </div>
+                    {% else %}
+                        <div class="post-like">
+                            <a href="{% url 'like_post' post.pk %}"
+                               class="btn btn-outline-primary btn-lg"
+                               title="Like Post">
+                                Like  <i class="fa fa-thumbs-up"></i>
+                            </a>
+                        </div>
+                    {% endif %}
                 {% endif %}
 
                 <div id="comments" class="comment-section">

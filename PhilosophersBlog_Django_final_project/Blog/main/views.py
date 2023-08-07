@@ -1,11 +1,10 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponseBadRequest
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse
-from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
+from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView, RedirectView
 
 from PhilosophersBlog_Django_final_project.Blog.main.forms import CreatePostForm, CommentForm
-from PhilosophersBlog_Django_final_project.Blog.main.models import Post, Category, Comment
+from PhilosophersBlog_Django_final_project.Blog.main.models import Post, Category, Comment, Like
 
 
 class IndexView(ListView):
@@ -41,6 +40,7 @@ class PostDetailsView(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['form'] = CommentForm()
+        context['user_liked'] = self.object.like_set.filter(user=self.request.user)
         return context
 
 
@@ -104,3 +104,24 @@ class DeleteCommentView(DeleteView):
         context = super().get_context_data(**kwargs)
         context['object'] = self.get_object()
         return context
+
+
+class LikeView(LoginRequiredMixin, RedirectView):
+
+    def get_redirect_url(self, *args, **kwargs):
+        post = get_object_or_404(Post, pk=self.kwargs['pk'])
+
+        kwargs = {
+            'post': post,
+            'user': self.request.user
+        }
+
+        like_object = Like.objects.filter(**kwargs).first()
+
+        if like_object:
+            like_object.delete()
+        else:
+            new_like_object = Like(**kwargs)
+            new_like_object.save()
+
+        return reverse_lazy('post_details', kwargs={'pk': post.pk})
