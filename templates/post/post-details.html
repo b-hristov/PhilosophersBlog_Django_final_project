@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-    <div class="post-content">
+
+    <div class="post-content-single">
         <div class="post-container content-wrap">
             <article class="post-details">
                 <header class="entry-header">
@@ -23,11 +24,13 @@
                             <i class="fa fa-thumbs-up fa-fw"></i><b>Total likes:</b> {{ post.like_set.count }}
                         </span>
                     </div>
+                    <hr>
                 </header>
 
                 <div class="entry-content" itemprop="articleBody">
                     {{ post.content | safe }}
                 </div>
+                <hr>
 
                 {% if user.is_authenticated and user == post.user %}
                     <div class="post-actions">
@@ -48,12 +51,26 @@
                     <h2>Comments</h2>
                     <hr>
                     {% for comment in post.comment_set.all %}
-                        <div class="comment">
+                        <div class="comment balloon">
                             <img src="{{ comment.user.profile.image.url }}" alt="Avatar" class="avatar">
                             <div class="comment-details">
-                                <p class="comment-author">{{ comment.user.username }}</p>
-                                <p class="comment-date">Posted on {{ comment.created_on|date:"F d, Y H:i:s" }}</p>
-                                <p class="comment-text">{{ comment.content }}</p>
+                                <div class="author-date-details">
+                                    <p class="comment-author">{{ comment.user.username }}</p>
+                                    <p class="comment-date">Posted on {{ comment.created_on|date:"F d, Y H:i:s" }}</p>
+                                </div>
+                                <div class="comment-content">
+                                    <p id="comment-{{ comment.id }}-content"
+                                       class="comment-text">{{ comment.content }}</p>
+                                </div>
+
+                                {% if request.user == comment.user %}
+                                    <a href="{% url 'edit_comment' comment.id %}" class="btn btn-success">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                    <a href="{% url 'delete_comment' comment.pk %}" class="btn btn-danger">
+                                        <i class="fa fa-trash"></i>
+                                    </a>
+                                {% endif %}
                             </div>
                         </div>
                     {% endfor %}
@@ -63,9 +80,11 @@
                         {% csrf_token %}
                         <img src="{{ user.profile.image.url }}" alt="Your Avatar" class="avatar">
                         <div class="comment-details">
-                            <textarea name="content" placeholder="Your comment"
-                                      required></textarea>
+                            <textarea name="content" placeholder="Your comment" required></textarea>
                             <button type="submit">Comment</button>
+                            {% if form.content.errors %}
+                                <p class="error">{{ form.content.errors }}</p>
+                            {% endif %}
                         </div>
                     </form>
                 </div>
@@ -73,4 +92,5 @@
             </article>
         </div>
     </div>
+
 {% endblock %}

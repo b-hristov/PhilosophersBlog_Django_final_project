@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="edit-form-container">
+        <h3>Edit your comment</h3>
+        <form class="comment-form" method="post" action="{% url 'edit_comment' comment.id %}#comments">
+            {% csrf_token %}
+            <img src="{{ user.profile.image.url }}" alt="Your Avatar" class="avatar">
+            <div class="comment-details">
+                <textarea name="content" placeholder="Your comment" rows="10" cols="100"
+                          required>{{ comment.content }}</textarea>
+                <button type="submit" class="btn btn-success">Save</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

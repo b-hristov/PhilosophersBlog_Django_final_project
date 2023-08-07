@@ -1,5 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import get_object_or_404
+from django.http import HttpResponseBadRequest
+from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 
@@ -52,7 +53,7 @@ class EditPostView(LoginRequiredMixin, UpdateView):
         return reverse_lazy('post_details', kwargs={'pk': self.object.pk})
 
 
-class DeletePostView(DeleteView):
+class DeletePostView(LoginRequiredMixin, DeleteView):
     model = Post
     template_name = 'post/delete-post.html'
     success_url = reverse_lazy('index')
@@ -64,10 +65,42 @@ class CreateCommentView(CreateView):
     template_name = 'post/post-details.html'
 
     def form_valid(self, form):
-        post = get_object_or_404(Post, id=self.kwargs['pk'])
-        form.instance.post = post
-        form.instance.user = self.request.user
-        return super().form_valid(form)
+        post = get_object_or_404(Post, pk=self.kwargs['pk'])
+        comment = form.save(commit=False)
+        comment.post = post
+        comment.user = self.request.user
+        comment.save()
+        return redirect('post_details', pk=post.pk)
 
     def get_success_url(self):
         return reverse('post_details', kwargs={'pk': self.kwargs['pk']})
+
+
+class EditCommentView(UpdateView):
+    model = Comment
+    form_class = CommentForm
+    template_name = 'comment/edit-comment.html'
+
+    def get_object(self, queryset=None):
+        comment = get_object_or_404(Comment, id=self.kwargs['pk'])
+        return comment
+
+    def get_success_url(self):
+        return reverse('post_details', kwargs={'pk': self.object.post.pk})
+
+
+class DeleteCommentView(DeleteView):
+    model = Comment
+    template_name = 'comment/delete-comment.html'
+
+    def get_object(self, queryset=None):
+        comment = get_object_or_404(Comment, id=self.kwargs['pk'])
+        return comment
+
+    def get_success_url(self):
+        return reverse('post_details', kwargs={'pk': self.object.post.pk})
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['object'] = self.get_object()
+        return context

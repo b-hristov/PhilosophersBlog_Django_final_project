@@ -70,3 +70,9 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ['content']
+
+    def clean_content(self):
+        content = self.cleaned_data['content']
+        if content.strip() == '':
+            raise forms.ValidationError("Comment content cannot be empty.")
+        return content
