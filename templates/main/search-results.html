@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    <h2 class="search-results">Search Results for: {{ query }}</h2>
+
+    {% if results %}
+        <div class="results-page-content">
+            <div class="results-post-content">
+                <div class="results-post-container">
+                    {% for post in results %}
+
+                        <article class="post-entry">
+
+                            <header class="entry-header">
+                                <h2 class="entry-title" itemprop="headline">
+                                    <a href="{% url 'post_details' pk=post.pk %}">
+                                        {{ post.title }}</a>
+                                </h2>
+                                <div class="entry-meta">
+                                            <span class="post-author"><i class="fa-solid fa-user"></i>
+{#                                    <a href="{% url 'profile' post.user.pk %}"> {{ post.user }} </a>#}
+                                                 <a href="#"> {{ post.user }} </a>
+                                            </span>
+
+                                    <span class="post-date"><i class="fa-solid fa-clock"></i>
+                                                <span class="updated">{{ post.created_on|date:"d M Y" }}</span>
+                                            </span>
+
+                                    <span class="post-categories"><i class="fa fa-folder fa-fw"></i>
+                                                <a href="#" rel="tag">{{ post.category }}</a>
+                                            </span>
+                                </div>
+                                <div class="comments-and-likes">
+                                            <span class="post-comments"><i class="fa fa-comments fa-fw"></i>
+                                                {{ post.comment_set.count }}
+                                            </span>
+                                    <span class="post-likes"><i class="fa fa-thumbs-up fa-fw"></i>
+                                                {{ post.like_set.count }}
+                                            </span>
+                                </div>
+                            </header>
+
+                            <div class="entry-content-all" itemprop="articleBody">
+                                <p>{{ post.content | truncatewords_html:300 | safe }}</p>
+                            </div>
+                            <a href="{% url 'post_details' pk=post.pk %}" class="read-more">Read full post
+                                <i class="fa fa-arrow-right"></i>
+                            </a>
+                        </article>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <script src="{% static 'js/changeIndexPageStyle.js' %}"></script>
+
+    {% else %}
+        <p class="no-results">No results found.</p>
+    {% endif %}
+
+
+
+{% endblock %}
