@@ -74,10 +74,11 @@ body {
 	text-decoration: underline;
 }
 
-.login-form p {
+.login-form > .text-center {
 	color: #fff;
     font-size: 18px;
 }
+
 .login-form a:hover {
 	text-decoration: none;
 }
