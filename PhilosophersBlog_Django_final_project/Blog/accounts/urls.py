@@ -8,5 +8,5 @@ urlpatterns = [
     path('profile/', ProfileView.as_view(), name='profile'),
     path('edit_profile/', EditProfileView.as_view(), name='edit_profile'),
     path('delete_profile/', DeleteProfileView.as_view(), name='delete_profile'),
-    path('posts/', MyPostsView.as_view(), name='my_posts'),
+    path('my_posts/', MyPostsView.as_view(), name='my_posts'),
 ]
