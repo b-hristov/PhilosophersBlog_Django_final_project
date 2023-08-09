@@ -48,6 +48,9 @@
                 <li><a href="{% url 'create_post' %}">Create post</a></li>
                 <li><a href="{% url 'my_posts' %}">My posts</a></li>
                 <li><a href="{% url 'profile' %}">My Profile</a></li>
+                {% if user.is_superuser %}
+                    <li><a href="/admin">Admin</a></li>
+                {% endif %}
                 <li><a href="{% url 'logout' %}">Logout</a></li>
             {% else %}
                 <li><a href="{% url 'login' %}">Login</a></li>
