@@ -1,8 +1,11 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+    <div class="page-title">
+        <h2>Search Results for: <b>{{ query }}</b></h2>
+        <hr>
+    </div>
 
-    <h2 class="search-results">Search Results for: {{ query }}</h2>
 
     {% if results %}
         <div class="results-page-content">
@@ -42,11 +45,15 @@
                             </header>
 
                             <div class="entry-content-all" itemprop="articleBody">
-                                <p>{{ post.content | truncatewords_html:300 | safe }}</p>
+                                {% if post.content|wordcount > 300 %}
+                                    {{ post.content | truncatewords_html:300 | safe }}
+                                    <a href="{% url 'post_details' pk=post.pk %}" class="read-more">
+                                        Read full post<i class="fa fa-arrow-right"></i>
+                                    </a>
+                                {% else %}
+                                    {{ post.content | safe }}
+                                {% endif %}
                             </div>
-                            <a href="{% url 'post_details' pk=post.pk %}" class="read-more">Read full post
-                                <i class="fa fa-arrow-right"></i>
-                            </a>
                         </article>
                     {% endfor %}
                 </div>
