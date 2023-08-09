@@ -1,4 +1,5 @@
 from django import forms
+from tinymce.widgets import TinyMCE
 
 from PhilosophersBlog_Django_final_project.Blog.main.models import Post, Category, Comment
 
@@ -46,6 +47,8 @@ class CreatePostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ['title', 'content']
+
+    content = forms.CharField(widget=TinyMCE())
 
     def save(self, commit=True):
         post = super().save(commit=False)
