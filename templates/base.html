@@ -31,18 +31,20 @@
 
             {% if user.is_authenticated %}
                 <li><a href="/">Home</a></li>
-                <li class="nav-item dropdown">
-                    <a href="#" id="categoriesDropdown" role="button"
-                       data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Categories  <i class="fa-regular fa-square-caret-down"></i>
-                    </a>
-                    <div class="dropdown-menu custom-dropdown" aria-labelledby="categoriesDropdown">
-                        {% for category in categories %}
-                            <a class="dropdown-item"
-                               href="{% url 'category_view' category.slug %}">{{ category.title }}</a>
-                        {% endfor %}
-                    </div>
-                </li>
+                {% if categories %}
+                    <li class="nav-item dropdown">
+                        <a href="#" id="categoriesDropdown" role="button"
+                           data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Categories <i class="fa-regular fa-square-caret-down"></i>
+                        </a>
+                        <div class="dropdown-menu custom-dropdown" aria-labelledby="categoriesDropdown">
+                            {% for category in categories %}
+                                <a class="dropdown-item"
+                                   href="{% url 'category_view' category.slug %}">{{ category.title }}</a>
+                            {% endfor %}
+                        </div>
+                    </li>
+                {% endif %}
                 <li><a href="{% url 'create_post' %}">Create post</a></li>
                 <li><a href="{% url 'my_posts' %}">My posts</a></li>
                 <li><a href="{% url 'profile' %}">My Profile</a></li>
