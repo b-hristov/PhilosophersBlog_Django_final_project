@@ -14,7 +14,9 @@
                         <article class="post entry">
 
                             <header class="entry-header">
-                                <h2 class="entry-title" itemprop="headline">{{ post.title }}</h2>
+                                <h2 class="entry-title" itemprop="headline">
+                                    <a href="{% url 'post_details' pk=post.pk %}">{{ post.title }}</a>
+                                </h2>
                                 <div class="entry-meta">
                                     <span class="post-author"><i class="fa-solid fa-user"></i>
 {#                                    <a href="{% url 'profile' post.user.pk %}"> {{ post.user }} </a>#}
@@ -37,25 +39,20 @@
                                 </div>
                             </header>
                             <div class="entry-content-all" itemprop="articleBody">
-                                <p>{{ post.content | truncatechars:500 | safe }}</p>
+                                {% if post.content|wordcount > 150 %}
+                                    {{ post.content | truncatewords_html:150 | safe }}
+                                    <a href="{% url 'post_details' pk=post.pk %}" class="read-more">
+                                        Read full post<i class="fa fa-arrow-right"></i>
+                                    </a>
+                                {% else %}
+                                    {{ post.content | safe }}
+                                {% endif %}
                             </div>
-                            <a href="{% url 'post_details' pk=post.pk %}" class="read-more">Read full post
-                                <i class="fa fa-arrow-right"></i>
-                            </a>
                         </article>
                     {% endfor %}
                 </div>
-                <div class="widget">
-                    <h3 class="widget-title">Categories</h3>
-                    <ul>
-                        <li><a href="#">All</a></li>
-                        {% for category in categories %}
-                            <li><a href="#">{{ category.title }}</a></li>
-                        {% endfor %}
-                    </ul>
-                </div>
             </div>
-            <div aria-label="Page navigation">
+            <div aria-label="Page navigation" class="page-navigation">
                 <ul class="pagination justify-content-left">
                     {% if is_paginated %}
                         {% if page_obj.has_previous %}
@@ -67,7 +64,8 @@
                             <li class="page-item">
                                 <a class="page-link" href="?page={{ page_obj.previous_page_number }}"
                                    aria-label="Previous">
-                                    <span aria-hidden="true">&lsaquo; Previous</span>
+                                    <span aria-hidden="true">&laquo;</span>
+                                    <span class="sr-only">Previous</span>
                                 </a>
                             </li>
                         {% endif %}
@@ -89,7 +87,8 @@
                         {% if page_obj.has_next %}
                             <li class="page-item">
                                 <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
-                                    <span aria-hidden="true">Next &rsaquo;</span>
+                                    <span aria-hidden="true">&raquo;</span>
+                                    <span class="sr-only">Next</span>
                                 </a>
                             </li>
                             <li class="page-item">

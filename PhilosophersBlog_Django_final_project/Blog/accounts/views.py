@@ -8,7 +8,7 @@ from django.views.generic import DetailView, TemplateView, ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .forms import RegisterUserForm, LoginForm, EditProfileForm
 from .models import Profile, BlogUser
-from ..main.models import Post
+from ..main.models import Post, Category
 
 UserModel = get_user_model()
 
@@ -45,8 +45,10 @@ class ProfileView(LoginRequiredMixin, View):
 
     def get(self, request, *args, **kwargs):
         profile = request.user.profile
+        categories = Category.objects.all()
         posts = Post.objects.filter(user=request.user).order_by('-created_on')
-        return render(request, self.template_name, {'profile': profile, 'posts': posts})
+        print(len(posts))
+        return render(request, self.template_name, {'profile': profile, 'posts': posts, 'categories': categories})
 
 
 class EditProfileView(LoginRequiredMixin, UpdateView):
@@ -54,6 +56,11 @@ class EditProfileView(LoginRequiredMixin, UpdateView):
     form_class = EditProfileForm
     template_name = 'profile/edit-profile.html'
     success_url = reverse_lazy('profile')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categories'] = Category.objects.all()
+        return context
 
     def get_object(self, queryset=None):
         return self.request.user.profile
@@ -72,6 +79,11 @@ class DeleteProfileView(LoginRequiredMixin, DeleteView):
     template_name = 'profile/delete-profile.html'
     success_url = reverse_lazy('index')
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categories'] = Category.objects.all()
+        return context
+
     def get_object(self, queryset=None):
         return self.request.user
 
@@ -83,10 +95,15 @@ class DeleteProfileView(LoginRequiredMixin, DeleteView):
 
 
 class MyPostsView(LoginRequiredMixin, ListView):
-    template_name = 'profile/my-posts.html'  # Use the same template as the profile view
+    template_name = 'profile/my-posts.html'
     model = Post
     context_object_name = 'posts'
     paginate_by = 10
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categories'] = Category.objects.all()
+        return context
 
     def get_queryset(self):
         user = self.request.user

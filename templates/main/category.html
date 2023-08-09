@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="page-title">
+        <h2>Posts in category <b>{{ selected_category.title }}</b></h2>
+        <hr>
+    </div>
+
+    <div class="greeting-banner" data-username="{{ user.username }}">
+        <p>Welcome {{ user.username }}! Enjoy our webspace and create your own content!</p>
+    </div>
+    <div class="page-content">
+        <div class="post-content">
+            <div class="post-container">
+                {% for post in posts %}
+                    <article class="post entry">
+
+                        <header class="entry-header">
+                            <h2 class="entry-title" itemprop="headline">
+                                <a href="{% url 'post_details' pk=post.pk %}">{{ post.title }}</a>
+                            </h2>
+                            <div class="entry-meta">
+                                    <span class="post-author"><i class="fa-solid fa-user"></i>
+{#                                    <a href="{% url 'profile' post.user.pk %}"> {{ post.user }} </a>#}
+                                    <a href="#"> {{ post.user }} </a>
+                                </span>
+                                <span class="post-date"><i class="fa-solid fa-clock"></i>
+                                    <span class="updated">{{ post.created_on|date:"d M Y" }}</span>
+                                </span>
+                                <span class="post-categories"><i class="fa fa-folder fa-fw"></i>
+                                    <a href="#" rel="tag">{{ post.category }}</a>
+                                </span>
+                            </div>
+                            <div class="comments-and-likes">
+                                    <span class="post-comments"><i class="fa fa-comments fa-fw"></i>
+                                        {{ post.comment_set.count }}
+                                    </span>
+                                <span class="post-likes"><i class="fa fa-thumbs-up fa-fw"></i>
+                                        {{ post.like_set.count }}
+                                    </span>
+                            </div>
+                        </header>
+                        <div class="entry-content-all" itemprop="articleBody">
+                            {% if post.content|wordcount > 50 %}
+                                {{ post.content | truncatewords_html:50 | safe }}
+                                <a href="{% url 'post_details' pk=post.pk %}" class="read-more">
+                                    Read full post<i class="fa fa-arrow-right"></i>
+                                </a>
+                            {% else %}
+                                {{ post.content | safe }}
+                            {% endif %}
+                        </div>
+                    </article>
+                {% endfor %}
+            </div>
+        </div>
+        <div aria-label="Page navigation" class="page-navigation">
+            <ul class="pagination justify-content-left">
+                {% if is_paginated %}
+                    {% if page_obj.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page=1" aria-label="First">
+                                <span aria-hidden="true">&laquo; First</span>
+                            </a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.previous_page_number }}"
+                               aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                        </li>
+                    {% endif %}
+
+                    {% for page_num in paginator.page_range %}
+                        {% if page_num == page_obj.number %}
+                            <li class="page-item active">
+                                <span class="page-link">{{ page_num }}</span>
+                            </li>
+                        {% else %}
+                            {% if page_num > page_obj.number|add:'-5' and page_num < page_obj.number|add:'5' %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a>
+                                </li>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if page_obj.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ paginator.num_pages }}" aria-label="Last">
+                                <span aria-hidden="true">Last &raquo;</span>
+                            </a>
+                        </li>
+                    {% endif %}
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+
+    <button id="topButton" onclick="scrollToTop()">
+        <span><i class="fa-solid fa-angles-up"></i></span>
+    </button>
+
+
+    <script src="{% static 'js/greetingBanner.js' %}"></script>
+    <script src="{% static 'js/changeIndexPageStyle.js' %}"></script>
+    <script src="{% static 'js/goToTopButton.js' %}"></script>
+{% endblock %}
