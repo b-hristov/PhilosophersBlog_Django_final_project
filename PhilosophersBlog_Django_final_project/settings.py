@@ -58,8 +58,7 @@ ROOT_URLCONF = 'PhilosophersBlog_Django_final_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates']
-        ,
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -152,7 +151,7 @@ TINYMCE_DEFAULT_CONFIG = {
     'height': 400,
     'plugins': 'textcolor ink image lists preview',
     'toolbar': 'preview | undo redo | styleselect | forecolor backcolor | bold italic '
-               '| fontsizeselect | bullist numlist | link image',
+               '| fontsizeselect | alignleft alignright |'
+               'aligncenter alignjustify | bullist numlist | link image',
     'menubar': False,
-    'setup': 'function(editor) { editor.on("paste", handlePaste); }',
 }
