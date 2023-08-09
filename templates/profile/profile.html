@@ -22,18 +22,10 @@
             </div>
         </section>
 
-        <div style="display: contents;">
-            <h2>My Posts</h2>
-            <hr style="width: 100%;">
+        <div>
+            <h2>My Posts: <a href="{% url 'my_posts' %}">{{ posts.count }}</a></h2>
+            <hr>
         </div>
 
-        <section class="posts">
-            {% for post in posts %}
-                <div class="post">
-                    <h3>{{ post.title }}</h3>
-                    <p>{{ post.content | truncatechars:200 }}</p>
-                </div>
-            {% endfor %}
-        </section>
     </div>
 {% endblock %}
