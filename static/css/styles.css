@@ -330,16 +330,15 @@ footer p {
 
 .entry-title a {
     text-decoration: none;
-    background-color: #d9c89f;
     color: #171c24;
-    border-radius: 5px;
-    /*padding: 7px;*/
-    box-shadow: 0 2px 15px rgb(236 167 164 / 90%);
-
 }
 
 .entry-title a:hover {
     font-weight: bold;
+    background-color: #eae0ba;
+    color: #171c24;
+    border-radius: 5px;
+    box-shadow: 0 2px 15px rgba(74, 68, 68, 0.9);
 }
 
 .entry-meta {
