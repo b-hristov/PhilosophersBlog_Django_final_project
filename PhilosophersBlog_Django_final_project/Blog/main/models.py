@@ -1,5 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.db import models
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
 from django.utils.text import slugify
 from tinymce import models as tinymce_models
 
@@ -24,6 +26,12 @@ class Category(models.Model):
 
     def __str__(self):
         return f'{self.title}'
+
+
+@receiver(pre_save, sender=Category)
+def generate_category_slug(sender, instance, **kwargs):
+    if not instance.slug:
+        instance.slug = slugify(instance.title)
 
 
 class Post(models.Model):
@@ -52,7 +60,7 @@ class Post(models.Model):
     )
 
     def __str__(self):
-        return f'{self.title}'
+        return f'{self.title}, {self.user}'
 
 
 class Comment(models.Model):
@@ -76,7 +84,7 @@ class Comment(models.Model):
     )
 
     def __str__(self):
-        return f'{self.content[:30]}'
+        return f'{self.content[:30]}, {self.user}'
 
 
 class Like(models.Model):
