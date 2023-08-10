@@ -19,14 +19,14 @@
                                 </h2>
                                 <div class="entry-meta">
                                     <span class="post-author"><i class="fa-solid fa-user"></i>
-{#                                    <a href="{% url 'profile' post.user.pk %}"> {{ post.user }} </a>#}
-                                    <a href="#"> {{ post.user }} </a>
+                                    {{ post.user }}
                                 </span>
                                     <span class="post-date"><i class="fa-solid fa-clock"></i>
                                     <span class="updated">{{ post.created_on|date:"d M Y" }}</span>
                                 </span>
                                     <span class="post-categories"><i class="fa fa-folder fa-fw"></i>
-                                    <a href="#" rel="tag">{{ post.category }}</a>
+                                    <a href="{% url 'category_view' post.category.slug %}"
+                                       rel="tag">{{ post.category }}</a>
                                 </span>
                                 </div>
                                 <div class="comments-and-likes">
@@ -106,11 +106,6 @@
             <span><i class="fa-solid fa-angles-up"></i></span>
         </button>
 
-
-        <script src="{% static 'js/greetingBanner.js' %}"></script>
-        <script src="{% static 'js/changeIndexPageStyle.js' %}"></script>
-        <script src="{% static 'js/goToTopButton.js' %}"></script>
-
     {% else %}
         <div class="blog-introduction">
             <p class="blog-intro-text">Welcome to <strong>Philosopher Inside You</strong> - a vibrant community of
@@ -130,4 +125,8 @@
                 wisdom and enlightenment.</p>
         </div>
     {% endif %}
+
+    <script src="{% static 'js/greetingBanner.js' %}"></script>
+    <script src="{% static 'js/changeIndexPageStyle.js' %}"></script>
+    <script src="{% static 'js/goToTopButton.js' %}"></script>
 {% endblock %}

@@ -1,114 +1,118 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+{% if not posts %}
+    <div class="page-title">
+        <h2>There are no posts created from you.</h2>
+        <hr>
+    </div>
+{% endif %}
 
-    <div class="page-content">
-        <div class="post-content">
-            <div class="post-container">
-                {% for post in posts %}
-                    <article class="post entry">
+<div class="page-content">
+    <div class="post-content">
+        <div class="post-container">
+            {% for post in posts %}
+                <article class="post entry">
 
-                        <header class="entry-header">
-                            <h2 class="entry-title" itemprop="headline">
-                                <a href="{% url 'post_details' pk=post.pk %}">{{ post.title }}</a>
-                            </h2>
-                            <div class="entry-meta">
+                    <header class="entry-header">
+                        <h2 class="entry-title" itemprop="headline">
+                            <a href="{% url 'post_details' pk=post.pk %}">{{ post.title }}</a>
+                        </h2>
+                        <div class="entry-meta">
                                 <span class="post-author"><i class="fa-solid fa-user"></i>
-{#                                    <a href="{% url 'profile' post.user.pk %}"> {{ post.user }} </a>#}
-                                    <a href="#"> {{ post.user }} </a>
+                                    {{ post.user }}
                                 </span>
 
-                                <span class="post-date"><i class="fa-solid fa-clock"></i>
+                            <span class="post-date"><i class="fa-solid fa-clock"></i>
                                     <span class="updated">{{ post.created_on|date:"d M Y" }}</span>
                                 </span>
 
-                                <span class="post-categories"><i class="fa fa-folder fa-fw"></i>
+                            <span class="post-categories"><i class="fa fa-folder fa-fw"></i>
                                     <a href="#" rel="tag">{{ post.category }}</a>
                                 </span>
-                            </div>
-                            <div class="comments-and-likes">
+                        </div>
+                        <div class="comments-and-likes">
                                     <span class="post-comments"><i class="fa fa-comments fa-fw"></i>
                                         {{ post.comment_set.count }}
                                     </span>
-                                <span class="post-likes"><i class="fa fa-thumbs-up fa-fw"></i>
+                            <span class="post-likes"><i class="fa fa-thumbs-up fa-fw"></i>
                                         {{ post.like_set.count }}
                                     </span>
-                            </div>
-                        </header>
-
-                        <div class="entry-content-all" itemprop="articleBody">
-                            {% if post.content|wordcount > 150 %}
-                                {{ post.content | truncatewords_html:150 | safe }}
-                                <a href="{% url 'post_details' pk=post.pk %}" class="read-more">
-                                    Read full post<i class="fa fa-arrow-right"></i>
-                                </a>
-                            {% else %}
-                                {{ post.content | safe }}
-                            {% endif %}
                         </div>
-                        <div class="edit-delete-btns">
-                            {% if user.is_authenticated and user == post.user %}
-                                <div class="post-actions">
-                                    <a href="{% url 'edit_post' pk=post.pk %}" class="btn-edit btn btn-success"
-                                       title="Edit Post">Edit Post <i class="fa fa-edit"></i></a>
-                                    <a href="{% url 'delete_post' pk=post.pk %}" class="btn-delete btn btn-danger"
-                                       title="Delete Post">Delete Post <i class="fa fa-trash"></i></a>
-                                </div>
-                            {% endif %}
-                        </div>
-                    </article>
+                    </header>
 
-                {% endfor %}
-            </div>
-        </div>
-        <div aria-label="Page navigation" class="page-navigation">
-            <ul class="pagination justify-content-left">
-                {% if is_paginated %}
-                    {% if page_obj.has_previous %}
-                        <li class="page-item">
-                            <a class="page-link" href="?page=1" aria-label="First">
-                                <span aria-hidden="true">&laquo; First</span>
+                    <div class="entry-content-all" itemprop="articleBody">
+                        {% if post.content|wordcount > 150 %}
+                            {{ post.content | truncatewords_html:150 | safe }}
+                            <a href="{% url 'post_details' pk=post.pk %}" class="read-more">
+                                Read full post<i class="fa fa-arrow-right"></i>
                             </a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="?page={{ page_obj.previous_page_number }}"
-                               aria-label="Previous">
-                                <span aria-hidden="true">&lsaquo; Previous</span>
-                            </a>
-                        </li>
-                    {% endif %}
-
-                    {% for page_num in paginator.page_range %}
-                        {% if page_num == page_obj.number %}
-                            <li class="page-item active">
-                                <span class="page-link">{{ page_num }}</span>
-                            </li>
                         {% else %}
-                            {% if page_num > page_obj.number|add:'-5' and page_num < page_obj.number|add:'5' %}
-                                <li class="page-item">
-                                    <a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a>
-                                </li>
-                            {% endif %}
+                            {{ post.content | safe }}
                         {% endif %}
-                    {% endfor %}
-
-                    {% if page_obj.has_next %}
-                        <li class="page-item">
-                            <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
-                                <span aria-hidden="true">Next &rsaquo;</span>
-                            </a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="?page={{ paginator.num_pages }}" aria-label="Last">
-                                <span aria-hidden="true">Last &raquo;</span>
-                            </a>
-                        </li>
-                    {% endif %}
-                {% endif %}
-            </ul>
+                    </div>
+                    <div class="edit-delete-btns">
+                        {% if user.is_authenticated and user == post.user %}
+                            <div class="post-actions">
+                                <a href="{% url 'edit_post' pk=post.pk %}" class="btn-edit btn btn-success"
+                                   title="Edit Post">Edit Post <i class="fa fa-edit"></i></a>
+                                <a href="{% url 'delete_post' pk=post.pk %}" class="btn-delete btn btn-danger"
+                                   title="Delete Post">Delete Post <i class="fa fa-trash"></i></a>
+                            </div>
+                        {% endif %}
+                    </div>
+                </article>
+            {% endfor %}
         </div>
     </div>
+    <div aria-label="Page navigation" class="page-navigation">
+        <ul class="pagination justify-content-left">
+            {% if is_paginated %}
+                {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page=1" aria-label="First">
+                            <span aria-hidden="true">&laquo; First</span>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}"
+                           aria-label="Previous">
+                            <span aria-hidden="true">&lsaquo; Previous</span>
+                        </a>
+                    </li>
+                {% endif %}
 
-    <script src="{% static 'js/changeIndexPageStyle.js' %}"></script>
+                {% for page_num in paginator.page_range %}
+                    {% if page_num == page_obj.number %}
+                        <li class="page-item active">
+                            <span class="page-link">{{ page_num }}</span>
+                        </li>
+                    {% else %}
+                        {% if page_num > page_obj.number|add:'-5' and page_num < page_obj.number|add:'5' %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a>
+                            </li>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+
+                {% if page_obj.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                            <span aria-hidden="true">Next &rsaquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ paginator.num_pages }}" aria-label="Last">
+                            <span aria-hidden="true">Last &raquo;</span>
+                        </a>
+                    </li>
+                {% endif %}
+            {% endif %}
+        </ul>
+    </div>
+</div>
+
+<script src="{% static 'js/changeIndexPageStyle.js' %}"></script>
 
 {% endblock %}
