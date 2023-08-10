@@ -34,12 +34,14 @@ class Profile(models.Model):
 
     last_name = models.CharField(
         max_length=25,
-        validators=(validate_names,)
+        validators=(
+            validate_names,
+        )
     )
 
     image = models.ImageField(
         upload_to='profile_avatars',
-        default='default_avatar/sample-avatar.jpg',
+        default='default_avatar/sample-avatar.png',
         null=True,
         blank=True,
         validators=(
@@ -48,8 +50,8 @@ class Profile(models.Model):
     )
 
     date_of_birth = models.DateField(
-        null=True,
-        blank=True,
+        null=False,
+        blank=False,
     )
 
     email = models.EmailField(
