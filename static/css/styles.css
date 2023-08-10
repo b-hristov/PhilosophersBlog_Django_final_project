@@ -495,7 +495,8 @@ footer p {
 /* Post details styles */
 
 .post-title {
-    font-size: 3em;
+    font-size: 2em;
+    font-weight: bold;
 }
 
 .post-details {
@@ -628,34 +629,6 @@ footer p {
     margin-right: 5px;
 }
 
-/* Like button */
-.post-like {
-    display: flex;
-    align-items: center;
-    font-size: 1.5em;
-    margin: 1.2em 1.2em 1.2em 0;
-}
-
-.btn-like {
-    display: inline-block;
-    padding: 5px;
-    color: #fff;
-    background-color: #28a745;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-right: 5px;
-    text-decoration: none;
-}
-
-.btn-like:hover {
-    background-color: #054706;
-}
-
-.edit-delete-btns {
-    margin-top: 20px;
-}
-
 
 /* Create post styles */
 
@@ -786,6 +759,39 @@ button:hover {
     line-height: 1.6;
 }
 
+
+/* Other styles */
+.post-like {
+    display: flex;
+    align-items: center;
+    font-size: 1.5em;
+    margin: 1.2em 1.2em 1.2em 0;
+}
+
+.btn-like {
+    display: inline-block;
+    padding: 5px;
+    color: #fff;
+    background-color: #28a745;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 5px;
+    text-decoration: none;
+}
+
+.btn-like:hover {
+    background-color: #054706;
+}
+
+.edit-delete-btns {
+    margin-top: 20px;
+}
+
+.no-results {
+    text-align: center;
+}
+
 .results-page-content {
     display: flex;
     justify-content: center;
@@ -895,7 +901,7 @@ button:hover {
 
 @media (max-width: 1245px) {
     nav {
-        padding: 0 0;
+        padding: 0;
     }
 
     .post-container {
@@ -903,7 +909,7 @@ button:hover {
     }
 }
 
-@media (max-width: 1380px) {
+@media (max-width: 1400px) {
     nav img {
         display: none;
     }
@@ -946,6 +952,7 @@ button:hover {
 
     nav form {
         position: absolute;
+        margin-top: 20px;
         top: 80px;
         right: 50px;
         opacity: 0;
@@ -1013,7 +1020,7 @@ button:hover {
     }
 }
 
-@media (max-width: 1600px) {
+@media (max-width: 1700px) {
     .page-content {
         align-items: center;
         margin-left: 0;
@@ -1024,9 +1031,16 @@ button:hover {
         margin: 100px 10px;
     }
 
+    nav .logo {
+        font-size: 20px;
+    }
+
+    nav .nav-items li a {
+        font-size: 13px;
+    }
+
     nav form {
-        margin-top: 20px;
-        width: 230px;
+        width: 185px;
     }
 
     .post {
