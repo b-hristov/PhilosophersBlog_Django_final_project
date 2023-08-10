@@ -9,4 +9,4 @@ class BlogAdmin(admin.ModelAdmin):
 
 @admin.register(BlogUser)
 class BlogAdmin(admin.ModelAdmin):
-    list_display = ('username', 'is_staff')
+    list_display = ('username', 'date_joined', 'is_staff')
