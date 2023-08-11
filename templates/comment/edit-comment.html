@@ -9,6 +9,11 @@
             <div class="comment-details">
                 <textarea name="content" placeholder="Your comment" rows="10" cols="100"
                           required>{{ comment.content }}</textarea>
+                {% if form.content.errors %}
+                    {% for error in form.content.errors %}
+                        <p class="text-danger">{{ error|striptags }}</p>
+                    {% endfor %}
+                {% endif %}
                 <button type="submit" class="btn btn-success">Save</button>
             </div>
         </form>
