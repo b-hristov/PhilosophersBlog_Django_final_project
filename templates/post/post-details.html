@@ -46,7 +46,7 @@
                             <a href="{% url 'like_post' post.pk %}"
                                class="btn btn-outline-primary btn-lg"
                                title="Unlike Post">
-                                Unlike  <i class="fa-solid fa-thumbs-down"></i>
+                                Unlike <i class="fa-solid fa-thumbs-down"></i>
                             </a>
                         </div>
                     {% else %}
@@ -54,7 +54,7 @@
                             <a href="{% url 'like_post' post.pk %}"
                                class="btn btn-outline-primary btn-lg"
                                title="Like Post">
-                                Like  <i class="fa fa-thumbs-up"></i>
+                                Like <i class="fa fa-thumbs-up"></i>
                             </a>
                         </div>
                     {% endif %}
@@ -89,11 +89,13 @@
                     {% endfor %}
 
                     <h3>Add a Comment</h3>
-                    <form class="comment-form" method="post" action="{% url 'create_comment' pk=post.pk %}#comments">
+                    <form class="comment-form" method="post" action="{% url 'create_comment' pk=post.pk %}"
+                          onsubmit="return validateComment()">
                         {% csrf_token %}
                         <img src="{{ user.profile.image.url }}" alt="Your Avatar" class="avatar">
                         <div class="comment-details">
-                            <textarea name="content" placeholder="Your comment" required></textarea>
+                            <textarea id="comment-content" name="content" placeholder="Your comment"
+                                      required></textarea>
                             <button type="submit">Comment</button>
                             {% if form.content.errors %}
                                 <p class="error">{{ form.content.errors }}</p>
@@ -105,5 +107,5 @@
             </article>
         </div>
     </div>
-
+    <script src="{% static 'js/commentInputValidation.js' %}"></script>
 {% endblock %}
