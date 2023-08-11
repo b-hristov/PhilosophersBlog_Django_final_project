@@ -28,7 +28,7 @@
                                 </span>
 
                             <span class="post-categories"><i class="fa fa-folder fa-fw"></i>
-                                    <a href="#" rel="tag">{{ post.category }}</a>
+                                    <a href="{% url 'category_view' post.category.slug %}" rel="tag">{{ post.category }}</a>
                                 </span>
                         </div>
                         <div class="comments-and-likes">
