@@ -7,10 +7,10 @@
                 <h2>Delete comment</h2>
                 <hr>
                 <p>Are you sure you want to delete this comment?</p>
-                <form method="post">
+                <form method="post"action="{% url 'delete_comment' pk=object.pk %}?next={% url 'post_details' pk=object.post.pk %}#comments">
                     {% csrf_token %}
                     <button type="submit" class="del-button-yes">Yes</button>
-                    <a href="{% url 'post_details' pk=object.post.pk %}" class="cancel-button">No</a>
+                    <a href="{% url 'post_details' pk=object.post.pk %}#comments" class="cancel-button">No</a>
                 </form>
             </div>
         </section>
