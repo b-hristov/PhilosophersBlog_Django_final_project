@@ -18,7 +18,6 @@ class IndexView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['user'] = self.request.user
-        context['categories'] = Category.objects.all()
         return context
 
 
@@ -32,11 +31,6 @@ class CreatePostView(LoginRequiredMixin, CreateView):
         kwargs['user'] = self.request.user
         return kwargs
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['categories'] = Category.objects.all()
-        return context
-
 
 class PostDetailsView(LoginRequiredMixin, DetailView):
     template_name = 'post/post-details.html'
@@ -47,7 +41,6 @@ class PostDetailsView(LoginRequiredMixin, DetailView):
         context = super().get_context_data(**kwargs)
         context['form'] = CommentForm()
         context['user_liked'] = self.object.like_set.filter(user=self.request.user)
-        context['categories'] = Category.objects.all()
         return context
 
 
@@ -55,11 +48,6 @@ class EditPostView(LoginRequiredMixin, UpdateView):
     model = Post
     template_name = 'post/edit-post.html'
     fields = ['title', 'content', 'category']
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['categories'] = Category.objects.all()
-        return context
 
     def get_success_url(self):
         return reverse_lazy('post_details', kwargs={'pk': self.object.pk})
@@ -69,11 +57,6 @@ class DeletePostView(LoginRequiredMixin, DeleteView):
     model = Post
     template_name = 'post/delete-post.html'
     success_url = reverse_lazy('index')
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['categories'] = Category.objects.all()
-        return context
 
 
 class CreateCommentView(CreateView):
@@ -89,11 +72,6 @@ class CreateCommentView(CreateView):
         comment.save()
         return redirect('post_details', pk=post.pk)
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['categories'] = Category.objects.all()
-        return context
-
     def get_success_url(self):
         return reverse('post_details', kwargs={'pk': self.kwargs['pk']})
 
@@ -102,11 +80,6 @@ class EditCommentView(UpdateView):
     model = Comment
     form_class = CommentForm
     template_name = 'comment/edit-comment.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['categories'] = Category.objects.all()
-        return context
 
     def get_object(self, queryset=None):
         comment = get_object_or_404(Comment, id=self.kwargs['pk'])
@@ -126,12 +99,6 @@ class DeleteCommentView(DeleteView):
 
     def get_success_url(self):
         return reverse('post_details', kwargs={'pk': self.object.post.pk})
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['object'] = self.get_object()
-        context['categories'] = Category.objects.all()
-        return context
 
 
 class LikeView(LoginRequiredMixin, RedirectView):
@@ -170,7 +137,6 @@ class SearchView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['query'] = self.request.GET.get('q')
-        context['categories'] = Category.objects.all()
         return context
 
 
@@ -187,5 +153,4 @@ class CategoryView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['selected_category'] = Category.objects.get(slug=self.kwargs['category_slug'])
-        context['categories'] = Category.objects.all()
         return context
