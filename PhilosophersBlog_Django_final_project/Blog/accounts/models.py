@@ -2,7 +2,7 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.db import models
 
 from PhilosophersBlog_Django_final_project.Blog.accounts.managers import BlogUserManager
-from PhilosophersBlog_Django_final_project.Blog.main.validators import validate_names, clean_avatar
+from PhilosophersBlog_Django_final_project.Blog.common.validators import validate_names, clean_avatar
 
 
 class BlogUser(AbstractBaseUser, PermissionsMixin):

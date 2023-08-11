@@ -5,7 +5,7 @@ from django.core.exceptions import ValidationError
 
 from PhilosophersBlog_Django_final_project.Blog.accounts.models import Profile
 from PhilosophersBlog_Django_final_project.Blog.accounts.widgets import ClearRedundantImageFieldsWidget
-from PhilosophersBlog_Django_final_project.Blog.main.validators import validate_names
+from PhilosophersBlog_Django_final_project.Blog.common.validators import validate_names
 
 UserModel = get_user_model()
 
