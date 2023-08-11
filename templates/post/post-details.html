@@ -89,7 +89,7 @@
                     {% endfor %}
 
                     <h3>Add a Comment</h3>
-                    <form class="comment-form" method="post" action="{% url 'create_comment' pk=post.pk %}"
+                    <form class="comment-form" method="post" action="{% url 'create_comment' pk=post.pk %}#comments"
                           onsubmit="return validateComment()">
                         {% csrf_token %}
                         <img src="{{ user.profile.image.url }}" alt="Your Avatar" class="avatar">
@@ -107,5 +107,11 @@
             </article>
         </div>
     </div>
+
+    <button id="topButton" onclick="scrollToTop()">
+        <span><i class="fa-solid fa-angles-up"></i></span>
+    </button>
+
+    <script src="{% static 'js/goToTopButton.js' %}"></script>
     <script src="{% static 'js/commentInputValidation.js' %}"></script>
 {% endblock %}
