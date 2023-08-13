@@ -10,7 +10,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('title', 'user',)
+    list_display = ('title', 'user', 'created_on', 'edited_on')
     search_fields = ('title', 'user__username',)
     list_filter = ('user__is_staff', 'created_on',)
     date_hierarchy = 'created_on'
