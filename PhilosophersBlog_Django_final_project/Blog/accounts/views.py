@@ -1,3 +1,5 @@
+import os
+
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth import login, get_user_model
@@ -75,9 +77,15 @@ class DeleteProfileView(LoginRequiredMixin, DeleteView):
     def get_object(self, queryset=None):
         return self.request.user
 
-    def delete(self, request, *args, **kwargs):
+    def post(self, request, *args, **kwargs):
         self.object = self.get_object()
-        self.object.profile.delete()
+        profile = self.object.profile
+
+        image_path = profile.image.path
+        if image_path and os.path.exists(image_path):
+            os.remove(image_path)
+
+        profile.delete()
         self.object.delete()
         return redirect(self.success_url)
 
