@@ -1,9 +1,8 @@
 from django.contrib.auth import get_user_model
 from django.db import models
-from django.db.models.signals import pre_save
-from django.dispatch import receiver
-from django.utils.text import slugify
 from tinymce import models as tinymce_models
+from django.template import defaultfilters
+from unidecode import unidecode
 
 UserModel = get_user_model()
 
@@ -21,17 +20,11 @@ class Category(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.title)
+            self.slug = defaultfilters.slugify(unidecode(self.title))
         super().save(*args, **kwargs)
 
     def __str__(self):
         return f'{self.title}'
-
-
-@receiver(pre_save, sender=Category)
-def generate_category_slug(sender, instance, **kwargs):
-    if not instance.slug:
-        instance.slug = slugify(instance.title)
 
 
 class Post(models.Model):
@@ -97,4 +90,3 @@ class Like(models.Model):
         Post,
         on_delete=models.CASCADE,
     )
-
