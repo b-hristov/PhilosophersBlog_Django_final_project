@@ -72,7 +72,7 @@ and comment or like the content of other users.
 ![register_page](https://github.com/b-hristov/PhilosophersBlog_Django_final_project/assets/77896833/545652a9-486e-4aca-9cd7-185b33eb3ade)
 
 <h3>4. Login page </h3>
-___
+
 ![login_page](https://github.com/b-hristov/PhilosophersBlog_Django_final_project/assets/77896833/c539d544-8390-44d7-9a6b-d1e2430b7570)
 
 <h3>5. Create post page </h3>
@@ -88,7 +88,7 @@ ___
 ![my_posts_page](https://github.com/b-hristov/PhilosophersBlog_Django_final_project/assets/77896833/0acdadfa-729f-4173-9be4-01ef3032b2a1)
 
 <h3>8. Categories page </h3>
-___
+
 ![categories_page](https://github.com/b-hristov/PhilosophersBlog_Django_final_project/assets/77896833/fd8af4f6-c61b-4f09-834e-9afe6187fe10)
 
 <h3>9. Post details page + comments section </h3>
