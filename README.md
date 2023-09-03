@@ -107,5 +107,5 @@ and comment or like the content of other users.
 <h3>12. Admin panel </h3>
 
 ![admin_panel](https://github.com/b-hristov/PhilosophersBlog_Django_final_project/assets/77896833/49b7123b-1e42-40fb-bd44-8b727de2b771)
-![admin_panel_1](https://github.com/b-hristov/PhilosophersBlog_Django_final_project/assets/77896833/0d13ed67-a469-421b-8d92-6ecb335566ec)
+![admin_panel_1](https://github.com/b-hristov/PhilosophersBlog_Django_final_project/assets/77896833/082a28ed-6ab4-401a-8f0c-c51dc9c82ede)
 ![admin_panel_2](https://github.com/b-hristov/PhilosophersBlog_Django_final_project/assets/77896833/8b469704-c3ef-42b2-9f1a-f762f678af8b)
